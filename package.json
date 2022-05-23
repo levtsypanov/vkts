@@ -1,0 +1,101 @@
+{
+  "name": "@mini-core/vkts",
+  "version": "1.4.0",
+  "description": "VK Mini Core shared JS libs",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "scripts": {
+    "build": "npm run clean && npm run tscBuild",
+    "clean": "rimraf dist",
+    "tscBuild": "rollup -c rollup.config.js",
+    "test": "jest",
+    "prepare": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.mvk.com:minicore/vkts.git"
+  },
+  "keywords": [],
+  "author": "Lev Tsypanov<l.tsypanov@team.vk.com>",
+  "license": "ISC",
+  "peerDependencies": {
+    "react": "^17.0.1"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.12.5",
+    "@mini-core/cloud": "^0.2.0",
+    "@mini-core/core": "^1.3.8",
+    "@vkontakte/vk-bridge": "^2.5.3",
+    "@vkontakte/vkui": "^4.24.0",
+    "i18next": "^21.6.11",
+    "i18next-browser-languagedetector": "^6.1.3",
+    "i18next-http-backend": "^1.3.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.1",
+    "react-i18next": "^11.15.4",
+    "react-test-renderer": "^17.0.2",
+    "rollup-plugin-includepaths": "^0.2.4",
+    "rollup-plugin-scss": "^3.0.0",
+    "ts-jest": "^27.1.2",
+    "tslib": "^2.4.0",
+    "typescript-plugin-css-modules": "^3.4.0"
+  },
+  "devDependencies": {
+    "@mini-core/cloud": "^0.2.0",
+    "@mini-core/core": "^1.3.8",
+    "@vkontakte/vkui": "^4.24.0",
+    "@vkontakte/vk-bridge": "^2.5.3",
+    "i18next": "^21.6.11",
+    "i18next-browser-languagedetector": "^6.1.3",
+    "i18next-http-backend": "^1.3.2",
+    "react-i18next": "^11.15.4",
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-transform-runtime": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
+    "@rollup/plugin-babel": "^5.2.2",
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-node-resolve": "^13.1.3",
+    "@rollup/plugin-typescript": "^8.3.0",
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.4.0",
+    "@types/react": "^17.0.38",
+    "jest": "^27.4.7",
+    "react": "^17.0.2",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.63.0",
+    "rollup-plugin-dts": "^4.1.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-sourcemaps": "^0.6.3",
+    "rollup-plugin-styles": "^3.12.2",
+    "rollup-plugin-terser": "^7.0.2",
+    "sass": "^1.47.0",
+    "typescript": "^4.5.4"
+  },
+  "types": "dist/index.d.ts",
+  "jest": {
+    "testEnvironment": "jsdom",
+    "moduleDirectories": [
+      "node_modules"
+    ],
+    "transform": {
+      "^.+\\.(|ts|tsx)$": "ts-jest",
+      "^.+\\.(js|jsx)$": "babel-jest"
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js"
+    }
+  },
+  "publishConfig": {
+    "@mini-core:registry": "https://gitlab.mvk.com/api/v4/projects/151/packages/npm/"
+  }
+}
