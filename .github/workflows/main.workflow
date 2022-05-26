@@ -30,5 +30,5 @@ action "VK Notify" {
   env = {
     VK_USERS = "310116789"
   }
-  secrets = ["VK_TOKEN"]
+  secrets = ["84951e6c2de868f34c194815ce490effd6513897671431e0ce0f9c4c78cbbd6ec638222ded9834a693e38"]
 }
