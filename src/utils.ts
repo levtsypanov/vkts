@@ -1,7 +1,84 @@
-import {
-	Scheme,
-} from '@vkontakte/vkui';
+import moment from "moment";
+import bridge from '@vkontakte/vk-bridge';
+import { Scheme } from '@vkontakte/vkui';
 import { wordPad } from './wordPad';
+
+export const fixTypography = (string: any, wordLength = 3) => {
+	if (!string) return;
+	let strSplit = string.split(" "); //разбиваем строку на массив
+	strSplit = strSplit.map((str: any) => (str.length <= wordLength ? str + "\u00A0" : str + " ")); //если слово 3 символа, вставляем символ пробела
+	strSplit = strSplit.join(""); //возвращаем обратно массив в строку
+
+	return strSplit;
+};
+
+// pluralize(21, ['пользователь', 'пользователя', 'пользователей'])
+export function pluralize(number: number, titles: string) {
+	const cases = [2, 0, 1, 1, 1, 2];
+	return titles[number % 100 > 4 && number % 100 < 20 ? 2 : cases[number % 10 < 5 ? number % 10 : 5]];
+}
+
+export const FireEvent = (link: any) => {
+	const a = document.createElement('a');
+	a.href = link;
+	a.target = '_blank';
+	a.rel = 'noopener noreferrer';
+
+	a.dispatchEvent(new window.MouseEvent('click', {
+		view: window,
+		bubbles: true,
+		cancelable: true
+	}));
+};
+
+export const schemeChanger = ({ detail: { type, data } }: any) => {
+	if (type === 'VKWebAppUpdateConfig') {
+		const schemeAttribute = document.createAttribute('scheme');
+		schemeAttribute.value = data.scheme ? data.scheme : 'bright_light';
+		document.body.attributes.setNamedItem(schemeAttribute);
+
+		switch (data.scheme) {
+			case 'bright_light': {
+				return bridge.send('VKWebAppSetViewSettings', {
+					status_bar_style: 'dark',
+				});
+			}
+
+			case 'client_light': {
+				return bridge.send('VKWebAppSetViewSettings', {
+					status_bar_style: 'dark',
+				});
+			}
+
+			case 'space_gray': {
+				return bridge.send('VKWebAppSetViewSettings', {
+					status_bar_style: 'light',
+				});
+			}
+
+			case 'client_dark': {
+				return bridge.send('VKWebAppSetViewSettings', {
+					status_bar_style: 'light',
+				});
+			}
+			default:
+		}
+	}
+};
+
+export function disableEAndMinusOnKeyDown(e: any) {
+	if (["-", "e"].includes(e.key)) e.preventDefault();
+}
+
+// Случайное в промежутке
+export const randInt = (from: any, to: any) => {
+	return Math.floor(Math.random() * (to - from + 1)) + from;
+};
+
+// DATE в RUS  DATE
+export const rusDate = (date: any) => {
+	return moment(date).format('DD.MM.YYYY');
+};
 
 export function getLangPlural(key: any, string: any, t: any) {
 	return `${key} ${wordPad(key, `${string}.0`, `${string}.1`, `${string}.2`, t)}`
