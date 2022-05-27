@@ -36,17 +36,16 @@ export * from './color';
  export * from './getGeodata';
 
 /**
- *  Working with connecting a language module
- *  import to root file getLangKey
- */ 
- export {} from './getLangKey';
- export * from './getLangKey';
-
-/**
  *  Working with connecting dates
  */
  export { getNiceDate, TimeConverter } from './getNiceDate';
  export * from './getNiceDate';
+
+ /**
+ *  To work with photos
+ */
+  export { i, getLargestVkPhoto, getImage300Width } from './images';
+  export * from './images';
 
 /**
  *  @ignore
@@ -104,7 +103,14 @@ export * from './loadAppToggles';
 /**
  *  All Utilites
  */
- export { 
+ export {
+    fixTypography,
+    pluralize,
+    FireEvent,
+    schemeChanger,
+    disableEAndMinusOnKeyDown,
+    randInt,
+    rusDate,
     getLangPlural,
     getCurrencyAmount,
     devErrorLog,
