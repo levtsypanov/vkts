@@ -2,7 +2,7 @@
  * Возвращает цветовые компоненты r, g, b
  * @param input цвет (hex, rgb)
  */
-export function parseColor(input: string) {
+ export function parseColor(input: string) {
     if (input[0] === '#') {
         const collen = (input.length - 1) / 3;
         const fact = [17, 1, 0.062272][collen - 1];

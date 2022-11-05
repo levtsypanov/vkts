@@ -1,4 +1,13 @@
 import { Scheme } from '@vkontakte/vkui';
+export declare const fixTypography: (string: any, wordLength?: number) => any;
+export declare function pluralize(number: number, titles: string): string;
+export declare const FireEvent: (link: any) => void;
+export declare const schemeChanger: ({ detail: { type, data } }: any) => Promise<{
+    result: true;
+}> | undefined;
+export declare function disableEAndMinusOnKeyDown(e: any): void;
+export declare const randInt: (from: any, to: any) => any;
+export declare const rusDate: (date: any) => string;
 export declare function getLangPlural(key: any, string: any, t: any): string;
 export declare function getCurrencyAmount(e: any): number;
 export declare function devErrorLog(e: any): void;

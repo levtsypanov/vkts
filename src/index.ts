@@ -1,7 +1,7 @@
 /**
  *  Working with launch options
  */
-export { 
+ export { 
     reduceHandler,
     getCurrentHashParams,
     getInitialHashParams,
@@ -188,4 +188,14 @@ export * from './vkStorage';
   /**
  * Libraries for official use VK Team
  */
-export * from './libs';
+
+  /**
+ *  @ignore
+ */
+   export { DeviceService } from './DeviceService';
+
+   export { HashParameterHandler } from './HashParameterHandler';
+
+   export { RemoteAPI } from './RemoteAPI';
+
+   export { escape, unescape, encodeHTMLEntities, decodeHTMLEntities } from './htmlEntities';

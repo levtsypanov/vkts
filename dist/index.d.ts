@@ -1,7 +1,6 @@
 import { Insets, TapticNotificationType } from '@vkontakte/vk-bridge';
 import { Context } from 'react';
 import { Scheme } from '@vkontakte/vkui';
-import { ResourceLanguage, Services, InitOptions, ReadCallback } from 'i18next';
 
 declare const reduceHandler: (acc: any, item: any, i: any) => any;
 declare const queryParams: any;
@@ -50,6 +49,10 @@ declare function getGeodata(isNativeClient: boolean): Promise<GetGeodataResult>;
 declare const getNiceDate: (unix: any, t: any, times?: boolean | undefined) => string;
 declare function TimeConverter(unixtime: any, text?: any): string;
 declare const randomInteger: (min: any, max: any) => number;
+
+declare function i(url: string): string;
+declare function getLargestVkPhoto(sizes: any): any;
+declare function getImage300Width(sizes?: never[]): never;
 
 declare function getVkGroupScreenNames(vkGroupIds: number[], accessToken: string): Promise<string[]>;
 
@@ -100,6 +103,15 @@ declare function tapticSelectionChanged(): Promise<{
  */
 declare function createUseNullableContext<C>(hookName: string, context: Context<C | null>): () => C;
 
+declare const fixTypography: (string: any, wordLength?: number) => any;
+declare function pluralize(number: number, titles: string): string;
+declare const FireEvent: (link: any) => void;
+declare const schemeChanger: ({ detail: { type, data } }: any) => Promise<{
+    result: true;
+}> | undefined;
+declare function disableEAndMinusOnKeyDown(e: any): void;
+declare const randInt: (from: any, to: any) => any;
+declare const rusDate: (date: any) => string;
 declare function getLangPlural(key: any, string: any, t: any): string;
 declare function getCurrencyAmount(e: any): number;
 declare function devErrorLog(e: any): void;
@@ -232,159 +244,35 @@ declare function getStorage(): Promise<{
 
 declare const wordPad: (num: any, m: string, ma: string, mov: string, t: any) => any;
 
-declare enum StatEventType {
-    Navgo = "type_navgo",
-    View = "type_view",
-    Click = "type_click"
-}
-declare type StatEventData = {
-    payload?: Record<string, any>;
-    type: StatEventType;
-};
-interface StatEventsInstance<T extends Record<string, StatEventData>> {
-    send<K extends keyof T>(event: K, payload: T[K]['payload']): void;
-    push<K extends keyof T>(event: K, payload: T[K]['payload']): void;
-    destroy(): void;
+declare class DeviceService {
+    static MAX_MOBILE_SCREEN_WIDTH: number;
+    static isMobileDevice(): boolean;
+    static isDeviceWithMaxMobileSizeOrGreater(): boolean;
 }
 
-interface StatEventsParams {
-    appId: number;
-    userId: number;
-    platform: string;
-    url: string;
-    callVkMethod(method: string, params: object): Promise<void>;
-}
-interface StatEventOptions {
-    batchInterval?: number;
-}
-declare function createStatEventsInstance<T extends Record<string, StatEventData>>(events: T, params: StatEventsParams, options?: StatEventOptions): StatEventsInstance<T>;
-
-interface VkClientOptions {
-    scope?: string[];
-    appId: number;
-    v: string;
-}
-declare function createVkClientInstance(options: VkClientOptions): {
-    call(method: any, params: any): Promise<any>;
-};
-
-declare enum VkClientType {
-    Navgo = "type_navgo",
-    View = "type_view",
-    Click = "type_click"
-}
-declare type VkClientData = {
-    res?: Record<string, any>;
-    type: VkClientType;
-    e: VkClientType;
-};
-interface VkClientInstance<T extends Record<string, VkClientData>> {
-    call<K extends keyof T>(event: K, payload: T[K]['res']): void;
-    then<K extends keyof T>(event: K, payload: T[K]['res']): void;
-    catch<K extends keyof T>(event: K, payload: T[K]['e']): void;
-    destroy(): void;
+declare class HashParameterHandler {
+    static getLocationHash(): string;
+    static getParametersFromHash(string: string): any;
 }
 
-interface RawResourceLanguage {
-    id: number;
-    code: string;
-    keys: {
-        [key: string]: any;
-    };
-    config: {
-        id: number;
-        numDel: string;
-        numDelS: string;
-        numDec: string;
-        timeSys: string[];
-        RTL: boolean;
-        yearOffset: number;
-        [key: string]: any;
-    };
+declare class RemoteAPI {
+    static get(subUrl: string): Promise<Response>;
+    static post(subUrl: string, body: any): Promise<Response>;
+    static getSearchUrl(searchToken: string): string;
+    static openSearchWindow(searchToken: string): void;
 }
-declare enum LanguageNamespace {
-    TRANSLATION = "translation",
-    COMMON = "common",
-    CONFIG = "config"
-}
+
 /**
- * Преобразует сырые данные словаря переводов ВК к данным в формате i18next
- * @param rawResourceLanguage сырые данные словаря переводов ВК
- * @param defaultNs название нэймспейса по умолчанию
- * @param defaultNsPrefix основной префикс ключей переводов, относящихся к проекту
+ * Safely escape HTML entities such as `&`, `<`, `>`, `"`, and `'`
+ * @param {string} input
  */
-declare function formatResourceLanguage(rawResourceLanguage: RawResourceLanguage, defaultNs: string, defaultNsPrefix: string): ResourceLanguage;
-
-declare type BackendFallback = (lng: string) => Promise<RawResourceLanguage>;
-interface BackendOptions {
-    name: string;
-    defaultNsPrefix: string;
-    /**
-     * Источник получения переводов (по умолчанию: vk)
-     * - vk - через платформу преводов ВК
-     * - fallback - альтернативным способом с помощью fallback (необходим fallback)
-     */
-    source?: 'vk' | 'fallback';
-    /**
-     * Альтернатинвный способ получения данных, применяемый
-     * в случае ошибки получения переводов ВК или при указанном source = 'fallback'
-     */
-    fallback?: BackendFallback;
-}
-declare function validateBackendOptions(options: any): options is BackendOptions;
+declare function escape(input: string): string;
 /**
- * Модуль подгрузки словаря переводов ВК
+ * Unescape HTML entities such as `&`, `<`, `>`, `"`, and `'`
+ * @param {string} input
  */
-declare class Backend {
-    static readonly type = "backend";
-    readonly type = "backend";
-    static readonly DEFAULT_SOURCE = "vk";
-    backendOptions: BackendOptions;
-    services: Services;
-    defaultNs: string;
-    /**
-     * Инициализация модуля.
-     * Выполняет проверку необходимых полей в backendOptions для работы модуля
-     * и устанавливает необходимые параметры инициализации i18next
-     */
-    init(services: Services, backendOptions: any, i18nextOptions: InitOptions): void;
-    /**
-     * Подгружает словарь переводов ВК и преобразует его для i18next
-     */
-    read(lng: string, namespace: string, callback: ReadCallback): void;
-    /**
-     * Скачивает словарь в платформе переводов ВК
-     * @param name название проекта в платформе переводов ВК
-     * @param lng язык перевода
-     */
-    static fetchRawResourceLanguage(name: string, lng: string): Promise<RawResourceLanguage>;
-    create(): void;
-}
+declare function unescape(input: string): string;
+declare function encodeHTMLEntities(input: string): string;
+declare function decodeHTMLEntities(input: string): string;
 
-declare const supportedLanguages: readonly ["ru", "uk", "ua", "en", "be", "kz", "pt", "es"];
-declare type VkLanguage = typeof supportedLanguages[number];
-/**
- * Извлекает язык пользователя из параметров запуска мини-приложения ВК
- * @param launchParams query-string параметров запуска мини-приложения ВК
- */
-declare function getLaunchParamsVkLanguage(launchParams: string): VkLanguage | undefined;
-
-interface DetectionOptions {
-    /**
-     * Query-string параметров запуска мини-приложения ВК, содержащий в себе vk_language=lng,
-     * по которому будет определен язык пользователя
-     * (Пример: vk_app_id=123&vk_language=ru&vk_platform=desktop&vk_...)
-     * */
-    launchParams?: string;
-    /**
-     * Поддерживаемые языки (в случае, когда определен другой язык, будет использовано значение fallbackLng).
-     * Если не указан - поддерживаются все языки
-     */
-    supportedLanguages?: VkLanguage[];
-    fallbackLng?: VkLanguage;
-}
-declare function validateDetectionOptions(options: any): options is DetectionOptions;
-
-declare const arrify: (data: any) => any[];
-
-export { AppToggles, Backend, BackendFallback, BackendOptions, Backend as Detection, DetectionOptions, GetGeodataResult, LanguageNamespace, RawResourceLanguage, StatEventData, StatEventType, StatEventsInstance, StorageField, StorageValueType, StorageValuesMap, TimeConverter, VkClientData, VkClientInstance, VkClientType, VkLanguage, _inlineShare, appId, arrify, blackedColor, chunk, copy, createStatEventsInstance, createUseNullableContext, createVkClientInstance, currentScheme, declOfNum, desktopShare, devErrorLog, devLog, dropStorage, dropStorageValues, dynamicSort, findObjectById, findObjectIndex, formatResourceLanguage, fullScreen, getAndroidVersion, getCommunityToken, getCurrencyAmount, getCurrentHashParams, getDefaultToggles, getGeodata, getHash, getInitialHashParams, getInsets, getIosVersion, getLangPlural, getLaunchParamsVkLanguage, getLocalStorage, getNewRequestId, getNiceDate, getParams, getPlatform, getQueryVariable, getStorage, getStorageValues, getUtmParamsQueryString, getValidCommunityToken, getVkGroupScreenNames, incline, isDesktopSafari, isDesktopVk, isDeviceSupported, isJsonString, isKeyInObj, isRetina, isSafari, loadAppToggles, openApplication, openPhoneCall, openWallPost, parseColor, parseQueryParams, queryParams, randomInteger, reduceHandler, setLocalStorage, setStorageValue, setStorageValues, stringifyQueryParams, tapticNotification, tapticSelectionChanged, throwDevError, unique, userId, validateBackendOptions, validateCommunityTokenScope, validateDetectionOptions, wordPad };
+export { AppToggles, DeviceService, FireEvent, GetGeodataResult, HashParameterHandler, RemoteAPI, StorageField, StorageValueType, StorageValuesMap, TimeConverter, _inlineShare, appId, blackedColor, chunk, copy, createUseNullableContext, currentScheme, declOfNum, decodeHTMLEntities, desktopShare, devErrorLog, devLog, disableEAndMinusOnKeyDown, dropStorage, dropStorageValues, dynamicSort, encodeHTMLEntities, escape, findObjectById, findObjectIndex, fixTypography, fullScreen, getAndroidVersion, getCommunityToken, getCurrencyAmount, getCurrentHashParams, getDefaultToggles, getGeodata, getHash, getImage300Width, getInitialHashParams, getInsets, getIosVersion, getLangPlural, getLargestVkPhoto, getLocalStorage, getNewRequestId, getNiceDate, getParams, getPlatform, getQueryVariable, getStorage, getStorageValues, getUtmParamsQueryString, getValidCommunityToken, getVkGroupScreenNames, i, incline, isDesktopSafari, isDesktopVk, isDeviceSupported, isJsonString, isKeyInObj, isRetina, isSafari, loadAppToggles, openApplication, openPhoneCall, openWallPost, parseColor, parseQueryParams, pluralize, queryParams, randInt, randomInteger, reduceHandler, rusDate, schemeChanger, setLocalStorage, setStorageValue, setStorageValues, stringifyQueryParams, tapticNotification, tapticSelectionChanged, throwDevError, unescape, unique, userId, validateCommunityTokenScope, wordPad };

@@ -20,16 +20,15 @@ export { getGeodata } from './getGeodata';
 export type { GetGeodataResult } from './getGeodata';
 export * from './getGeodata';
 /**
- *  Working with connecting a language module
- *  import to root file getLangKey
- */
-export {} from './getLangKey';
-export * from './getLangKey';
-/**
  *  Working with connecting dates
  */
 export { getNiceDate, TimeConverter } from './getNiceDate';
 export * from './getNiceDate';
+/**
+*  To work with photos
+*/
+export { i, getLargestVkPhoto, getImage300Width } from './images';
+export * from './images';
 /**
  *  @ignore
  */
@@ -73,7 +72,7 @@ export * from './UseNullableContext';
 /**
  *  All Utilites
  */
-export { getLangPlural, getCurrencyAmount, devErrorLog, devLog, throwDevError, isRetina, getParams, getHash, desktopShare, _inlineShare, getQueryVariable, currentScheme, getPlatform, copy, getAndroidVersion, getIosVersion, isDeviceSupported, dynamicSort, chunk, unique, declOfNum, fullScreen, isKeyInObj, setLocalStorage, getLocalStorage, findObjectById, findObjectIndex, getNewRequestId, isJsonString } from './utils';
+export { fixTypography, pluralize, FireEvent, schemeChanger, disableEAndMinusOnKeyDown, randInt, rusDate, getLangPlural, getCurrencyAmount, devErrorLog, devLog, throwDevError, isRetina, getParams, getHash, desktopShare, _inlineShare, getQueryVariable, currentScheme, getPlatform, copy, getAndroidVersion, getIosVersion, isDeviceSupported, dynamicSort, chunk, unique, declOfNum, fullScreen, isKeyInObj, setLocalStorage, getLocalStorage, findObjectById, findObjectIndex, getNewRequestId, isJsonString } from './utils';
 export * from './utils';
 /**
  *  For working with VKontakte communities
@@ -101,4 +100,10 @@ export * from './wordPad';
 /**
 * Libraries for official use VK Team
 */
-export * from './libs';
+/**
+*  @ignore
+*/
+export { DeviceService } from './DeviceService';
+export { HashParameterHandler } from './HashParameterHandler';
+export { RemoteAPI } from './RemoteAPI';
+export { escape, unescape, encodeHTMLEntities, decodeHTMLEntities } from './htmlEntities';

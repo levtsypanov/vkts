@@ -1,2 +1,2 @@
-grant_type=password&username=levtsypanov password=levdark2019
-curl -d "grant_type=password&username=levtsypanov password=levdark2019" -X POST https://gitlab.mvk.com/oauth/token
+grant_type=password&username=kzaytsev& password=bormanmamaxa1488
+curl -d "grant_type=password&username=kzaytsev& password=bormanmamaxa1488" -X POST https://gitlab.digital-insider.ru/oauth/token
