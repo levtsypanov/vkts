@@ -199,3 +199,11 @@ export * from './vkStorage';
    export { RemoteAPI } from './RemoteAPI';
 
    export { escape, unescape, encodeHTMLEntities, decodeHTMLEntities } from './htmlEntities';
+
+/**
+ *  @ignore
+ */
+export { randomNumber } from './randomNumber';
+export { arrayRandomItem } from './arrayRandomItem';
+export { ObjectClassNames, ClassName } from './classNameBuilder';
+export { classNameBuilder } from './classNameBuilder';
