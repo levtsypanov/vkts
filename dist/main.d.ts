@@ -114,3 +114,4 @@ export { randomNumber } from './randomNumber';
 export { arrayRandomItem } from './arrayRandomItem';
 export { ObjectClassNames, ClassName } from './classNameBuilder';
 export { classNameBuilder } from './classNameBuilder';
+export { createContextComponent } from './createContextComponent';
