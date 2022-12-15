@@ -184,3 +184,91 @@ function share(e: any, urlSharing: any, app_id: number) {
       attachments: urlPhotoWall,
     });
   }
+
+  export const getAppGetLaunchParams = async () => {
+    return await bridge
+      .send("VKWebAppGetLaunchParams", {})
+      .then((data) => {
+        if (data) {
+          return data;
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  export const getUserProfileInfo = async (user_id: number) => {
+    return await bridge
+      .send("VKWebAppGetUserInfo", {
+        user_id: user_id,
+      })
+      .then((data) => {
+        if (data) {
+          return data;
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  export const getPermissionForPhotos = async (app_id: number) => {
+    return await bridge
+      .send("VKWebAppGetAuthToken", {
+        app_id: app_id,
+        scope: "photo",
+      })
+      .then((data) => {
+        if (data.access_token) {
+          return data.access_token;
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  export const suggestToJoin = async (group_id: number) => {
+    return await bridge.send('VKWebAppJoinGroup', {
+      group_id: group_id
+    })
+      .then((data) => {
+        if (data.result) {
+          return data.result
+        }
+      })
+      .catch((error) => {
+        return error.error_reason
+      });
+  }
+
+  export const allowMessages = async (group_id: number) => {
+    return await bridge.send('VKWebAppAllowMessagesFromGroup', {
+      group_id: group_id,
+      key: ''
+    })
+      .then((data) => {
+        if (data.result) {
+          // Пользователь разрешил отправку сообщений от имени сообщества
+          console.log((data.result));
+        }
+      })
+      .catch((error) => {
+        // Ошибка
+        console.log(error);
+      });
+  }
+
+  export const getUserId = async () => {
+    return await getAppGetLaunchParams().then((data: any) => {
+      return data.vk_user_id;
+    });
+  };
+
+  export const getUserProfilePhoto = async () => {
+    return await getUserId().then(async (user_id) => {
+      const data: any = await getUserProfileInfo(user_id);
+      return data.photo_max_orig;
+    });
+  };
