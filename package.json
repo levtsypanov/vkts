@@ -1,6 +1,6 @@
 {
     "name": "@mini-core/vkts",
-    "version": "1.6.5",
+    "version": "1.6.6",
     "license": "MIT",
     "description": "VK Mini Core shared JS libs",
     "main": "./dist/main.js",

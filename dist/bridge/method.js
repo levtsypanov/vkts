@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.returnAsyncMethod = exports.returnMethod = exports.goToApp = exports.AddToCommunity = exports.addGroup = exports.subscribeMessageFromGroupTasks = exports.subscribeMessageFromGroupDefault = exports.getUserToken = void 0;
+exports.getUserProfilePhoto = exports.getUserId = exports.allowMessages = exports.suggestToJoin = exports.getPermissionForPhotos = exports.getUserProfileInfo = exports.getAppGetLaunchParams = exports.returnAsyncMethod = exports.returnMethod = exports.goToApp = exports.AddToCommunity = exports.addGroup = exports.subscribeMessageFromGroupTasks = exports.subscribeMessageFromGroupDefault = exports.getUserToken = void 0;
 const vk_bridge_1 = __importDefault(require("@vkontakte/vk-bridge"));
 // получение токена пользователя
 const getUserToken = async (setUserToken, app_id) => {
@@ -168,3 +168,91 @@ function share(e, urlSharing, app_id) {
         attachments: urlPhotoWall,
     });
 }
+const getAppGetLaunchParams = async () => {
+    return await vk_bridge_1.default
+        .send("VKWebAppGetLaunchParams", {})
+        .then((data) => {
+        if (data) {
+            return data;
+        }
+    })
+        .catch((error) => {
+        console.log(error);
+    });
+};
+exports.getAppGetLaunchParams = getAppGetLaunchParams;
+const getUserProfileInfo = async (user_id) => {
+    return await vk_bridge_1.default
+        .send("VKWebAppGetUserInfo", {
+        user_id: user_id,
+    })
+        .then((data) => {
+        if (data) {
+            return data;
+        }
+    })
+        .catch((error) => {
+        console.log(error);
+    });
+};
+exports.getUserProfileInfo = getUserProfileInfo;
+const getPermissionForPhotos = async (app_id) => {
+    return await vk_bridge_1.default
+        .send("VKWebAppGetAuthToken", {
+        app_id: app_id,
+        scope: "photo",
+    })
+        .then((data) => {
+        if (data.access_token) {
+            return data.access_token;
+        }
+    })
+        .catch((error) => {
+        console.log(error);
+    });
+};
+exports.getPermissionForPhotos = getPermissionForPhotos;
+const suggestToJoin = async (group_id) => {
+    return await vk_bridge_1.default.send('VKWebAppJoinGroup', {
+        group_id: group_id
+    })
+        .then((data) => {
+        if (data.result) {
+            return data.result;
+        }
+    })
+        .catch((error) => {
+        return error.error_reason;
+    });
+};
+exports.suggestToJoin = suggestToJoin;
+const allowMessages = async (group_id) => {
+    return await vk_bridge_1.default.send('VKWebAppAllowMessagesFromGroup', {
+        group_id: group_id,
+        key: ''
+    })
+        .then((data) => {
+        if (data.result) {
+            // Пользователь разрешил отправку сообщений от имени сообщества
+            console.log((data.result));
+        }
+    })
+        .catch((error) => {
+        // Ошибка
+        console.log(error);
+    });
+};
+exports.allowMessages = allowMessages;
+const getUserId = async () => {
+    return await (0, exports.getAppGetLaunchParams)().then((data) => {
+        return data.vk_user_id;
+    });
+};
+exports.getUserId = getUserId;
+const getUserProfilePhoto = async () => {
+    return await (0, exports.getUserId)().then(async (user_id) => {
+        const data = await (0, exports.getUserProfileInfo)(user_id);
+        return data.photo_max_orig;
+    });
+};
+exports.getUserProfilePhoto = getUserProfilePhoto;
