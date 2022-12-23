@@ -209,3 +209,7 @@ export { ObjectClassNames, ClassName } from './classNameBuilder';
 export { classNameBuilder } from './classNameBuilder';
 // @ts-ignore
 export { createContextComponent } from './createContextComponent';
+
+export { isNumeric, isFunction, leadingZero, isPrimitiveReactNode, noop } from './vkui/utils';
+export { classNames } from './vkui/classNames';
+export { classNamesString } from './vkui/classNames';
