@@ -1,6 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.noop = exports.isPrimitiveReactNode = exports.leadingZero = exports.isFunction = exports.isNumeric = void 0;
+exports.noop = exports.isPrimitiveReactNode = exports.leadingZero = exports.isFunction = exports.isNumeric = exports.hasReactNode = void 0;
+function hasReactNode(value) {
+    return (value !== undefined && value !== false && value !== null && value !== '');
+}
+exports.hasReactNode = hasReactNode;
 // Является ли переданное значение числовым
 function isNumeric(value) {
     return !isNaN(parseFloat(value)) && isFinite(value);
