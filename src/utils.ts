@@ -1,6 +1,6 @@
 import moment from "moment";
 import bridge from '@vkontakte/vk-bridge';
-import { Scheme } from '@vkontakte/vkui';
+import { Appearance } from '@vkontakte/vkui';
 import { wordPad } from './wordPad';
 
 export const fixTypography = (string: any, wordLength = 3) => {
@@ -252,13 +252,13 @@ function getQueryVariable(variable: any) {
 function currentScheme() {
 	let query = getQueryVariable("scheme");
 	if (query === "amoled") return "amoled";
-	if (query === "dark") return Scheme.SPACE_GRAY;
-	if (query === "") return Scheme.BRIGHT_LIGHT;
+	if (query === "dark") return Appearance.DARK;
+	if (query === "") return Appearance.LIGHT;
 	if (window.matchMedia('(prefers-color-scheme)').media !== 'not all') {
-		if (window.matchMedia('(prefers-color-scheme: dark)').matches) return Scheme.SPACE_GRAY;
-		return Scheme.BRIGHT_LIGHT;
+		if (window.matchMedia('(prefers-color-scheme: dark)').matches) return Appearance.DARK;
+		return Appearance.LIGHT;
 	};
-	return Scheme.BRIGHT_LIGHT;
+	return Appearance.LIGHT;
 };
 
 function getPlatform() {

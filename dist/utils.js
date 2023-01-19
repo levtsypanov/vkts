@@ -243,16 +243,16 @@ function currentScheme() {
     if (query === "amoled")
         return "amoled";
     if (query === "dark")
-        return vkui_1.Scheme.SPACE_GRAY;
+        return vkui_1.Appearance.DARK;
     if (query === "")
-        return vkui_1.Scheme.BRIGHT_LIGHT;
+        return vkui_1.Appearance.LIGHT;
     if (window.matchMedia('(prefers-color-scheme)').media !== 'not all') {
         if (window.matchMedia('(prefers-color-scheme: dark)').matches)
-            return vkui_1.Scheme.SPACE_GRAY;
-        return vkui_1.Scheme.BRIGHT_LIGHT;
+            return vkui_1.Appearance.DARK;
+        return vkui_1.Appearance.LIGHT;
     }
     ;
-    return vkui_1.Scheme.BRIGHT_LIGHT;
+    return vkui_1.Appearance.LIGHT;
 }
 exports.currentScheme = currentScheme;
 ;
