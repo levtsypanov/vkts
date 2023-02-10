@@ -3,18 +3,26 @@ VK Mini Core shared JS libs
 
 
 ## Установка
-```
+
+**github**:
+
+```shell
 npm i github:levtsypanov/vkts --save
+```
+
+**mvk**:
+
+```shell
+npm i gitlab.mvk.com:mini-core/vkts
 ```
 
 ## Использование
 
-Services libs
 ```jsx
-import { createStatEventsInstance } from '@mini-core/vkts';
+import { getUserToken } from '@mini-core/vkts/dist/bridge/method';
 ```
+или
 
-Utils
 ```jsx
-import { getNiceDate } from "@mini-core/vkts";
+import { getUserToken } from "@mini-core/vkts";
 ```
