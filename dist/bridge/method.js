@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUserProfilePhoto = exports.getUserId = exports.allowMessages = exports.suggestToJoin = exports.getPermissionForPhotos = exports.getUserProfileInfo = exports.getAppGetLaunchParams = exports.returnAsyncMethod = exports.returnMethod = exports.goToApp = exports.AddToCommunity = exports.addGroup = exports.subscribeMessageFromGroupTasks = exports.subscribeMessageFromGroupDefault = exports.getUserToken = void 0;
+exports.getUserProfilePhoto = exports.getUserId = exports.allowMessages = exports.suggestToJoin = exports.getPermissionForPhotos = exports.getUserProfileInfo = exports.getAppGetLaunchParams = exports.share = exports.copyLink = exports.shareLink = exports.returnAsyncMethod = exports.returnMethod = exports.goToApp = exports.AddToCommunity = exports.addGroup = exports.subscribeMessageFromGroupTasks = exports.subscribeMessageFromGroupDefault = exports.getUserToken = void 0;
 const vk_bridge_1 = __importDefault(require("@vkontakte/vk-bridge"));
 // получение токена пользователя
 const getUserToken = async (setUserToken, app_id) => {
@@ -143,6 +143,7 @@ function shareLink(link) {
         link: link,
     });
 }
+exports.shareLink = shareLink;
 // Копирование в буфер
 function copyLink(openAlert, link) {
     vk_bridge_1.default
@@ -157,6 +158,7 @@ function copyLink(openAlert, link) {
     })
         .catch((error) => { });
 }
+exports.copyLink = copyLink;
 //  ДОБАВЛЕНИЕ РЕПОСТА НА СТЕНУ ПОЛЬЗОВАТЕЛЯ
 function share(e, urlSharing, app_id) {
     e.preventDefault();
@@ -168,6 +170,7 @@ function share(e, urlSharing, app_id) {
         attachments: urlPhotoWall,
     });
 }
+exports.share = share;
 const getAppGetLaunchParams = async () => {
     return await vk_bridge_1.default
         .send("VKWebAppGetLaunchParams", {})

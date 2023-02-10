@@ -24,7 +24,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createContextComponent = void 0;
-const jsx_runtime_1 = require("react/jsx-runtime");
 /* eslint-disable @typescript-eslint/ban-types */
 const react_1 = __importStar(require("react"));
 /**
@@ -53,7 +52,7 @@ const createContextComponent = function (handlerCreator) {
     const Context = react_1.default.createContext(undefined);
     const Provider = (props) => (
     // @ts-ignore
-    (0, jsx_runtime_1.jsx)(Context.Provider, { value: handlerCreator(props), children: props.children }));
+    <Context.Provider value={handlerCreator(props)}>{props.children}</Context.Provider>);
     return {
         Provider: Provider,
         Consumer: Context.Consumer,
