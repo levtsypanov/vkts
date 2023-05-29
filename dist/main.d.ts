@@ -118,3 +118,4 @@ export { createContextComponent } from './createContextComponent';
 export { isNumeric, isFunction, leadingZero, isPrimitiveReactNode, noop } from './vkui/utils';
 export { classNames } from './vkui/classNames';
 export { classNamesString } from './vkui/classNames';
+export { isWebView } from './isWebView';
