@@ -3,8 +3,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUserProfilePhoto = exports.getUserId = exports.allowMessages = exports.suggestToJoin = exports.getPermissionForPhotos = exports.getUserProfileInfo = exports.getAppGetLaunchParams = exports.share = exports.copyLink = exports.shareLink = exports.returnAsyncMethod = exports.returnMethod = exports.goToApp = exports.AddToCommunity = exports.addGroup = exports.subscribeMessageFromGroupTasks = exports.subscribeMessageFromGroupDefault = exports.getUserToken = void 0;
+exports.sendMiniAppEvent = exports.callApiMethod = exports.subscribeToPush = exports.getUserProfilePhoto = exports.getUserId = exports.allowMessages = exports.suggestToJoin = exports.getPermissionForPhotos = exports.getUserProfileInfo = exports.getAppGetLaunchParams = exports.share = exports.copyLink = exports.shareLink = exports.returnAsyncMethod = exports.returnMethod = exports.goToApp = exports.AddToCommunity = exports.addGroup = exports.subscribeMessageFromGroupTasks = exports.subscribeMessageFromGroupDefault = exports.getUserToken = exports.queryParams = void 0;
 const vk_bridge_1 = __importDefault(require("@vkontakte/vk-bridge"));
+const reduceHandler = (acc, item, i) => {
+    if (i === 0 && !item.includes("="))
+        return { ...acc, shortId: parseInt(item, 10), shortValue: item, [item]: item };
+    const [key, value] = decodeURIComponent(item).split("=");
+    return key ? { ...acc, [key]: value } : acc;
+};
+exports.queryParams = window.location.search.replace("?", "").split("&").reduce(reduceHandler, {});
 // получение токена пользователя
 const getUserToken = async (setUserToken, app_id) => {
     let token = "";
@@ -259,3 +266,43 @@ const getUserProfilePhoto = async () => {
     });
 };
 exports.getUserProfilePhoto = getUserProfilePhoto;
+const subscribeToPush = () => {
+    return vk_bridge_1.default.send("VKWebAppAllowNotifications");
+};
+exports.subscribeToPush = subscribeToPush;
+async function callApiMethod(method, params, { token } = {}) {
+    const resp = await vk_bridge_1.default.send("VKWebAppCallAPIMethod", {
+        method: method,
+        params: {
+            v: "5.158",
+            ...params,
+            access_token: token,
+        },
+    });
+    return resp.response;
+}
+exports.callApiMethod = callApiMethod;
+async function sendMiniAppEvent(event, customAppId, token, userId, appId) {
+    const params = {
+        events: [
+            {
+                user_id: userId,
+                mini_app_id: customAppId || appId,
+                type: "type_navgo",
+                type_navgo: {
+                    type: "type_mini_app_custom_event_item",
+                },
+                url: window.location.href,
+                vk_platform: exports.queryParams.vk_platform,
+                event,
+                screen: "main",
+                json: "",
+            },
+        ],
+    };
+    console.info("send mini app event", params);
+    const res = await callApiMethod("statEvents.addMiniApps", params, { token });
+    console.log("mini app event resp", res);
+    return res;
+}
+exports.sendMiniAppEvent = sendMiniAppEvent;

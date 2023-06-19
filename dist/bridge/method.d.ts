@@ -1,3 +1,4 @@
+export declare const queryParams: any;
 export declare const getUserToken: (setUserToken: string, app_id: number) => Promise<string>;
 export declare function subscribeMessageFromGroupDefault(groupIDsubscription: any, setTemplatePage: any, nextPage: any): void;
 export declare function subscribeMessageFromGroupTasks(openAlert: any, groupIDsubscription: any, typeState: any): void;
@@ -16,3 +17,8 @@ export declare const suggestToJoin: (group_id: number) => Promise<any>;
 export declare const allowMessages: (group_id: number) => Promise<void>;
 export declare const getUserId: () => Promise<any>;
 export declare const getUserProfilePhoto: () => Promise<any>;
+export declare const subscribeToPush: () => Promise<{
+    result: true;
+}>;
+export declare function callApiMethod(method: any, params: any, { token }?: any): Promise<any>;
+export declare function sendMiniAppEvent(event: any, customAppId: number, token: string, userId: number, appId: number): Promise<any>;

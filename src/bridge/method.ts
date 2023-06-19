@@ -1,5 +1,13 @@
 import bridge from "@vkontakte/vk-bridge";
 
+const reduceHandler = (acc: any, item: any, i: any) => {
+    if (i === 0 && !item.includes("=")) return { ...acc, shortId: parseInt(item, 10), shortValue: item, [item]: item };
+    const [key, value] = decodeURIComponent(item).split("=");
+    return key ? { ...acc, [key]: value } : acc;
+  };
+
+export const queryParams = window.location.search.replace("?", "").split("&").reduce(reduceHandler, {});
+
 // получение токена пользователя
 export const getUserToken = async (setUserToken: string, app_id: number) => {
   let token = "";
@@ -272,3 +280,45 @@ export const getUserProfilePhoto = async () => {
     return data.photo_max_orig;
   });
 };
+
+export const subscribeToPush = () => {
+    return bridge.send("VKWebAppAllowNotifications");
+};
+
+export async function callApiMethod(method: any, params: any, { token }: any = {}) {
+    const resp = await bridge.send("VKWebAppCallAPIMethod", {
+      method: method,
+      params: {
+        v: "5.158",
+        ...params,
+        access_token: token,
+      },
+    });
+  
+    return resp.response;
+}
+
+export async function sendMiniAppEvent(event: any, customAppId: number, token: string, userId: number, appId: number) {
+  
+    const params = {
+      events: [
+        {
+          user_id: userId,
+          mini_app_id: customAppId || appId,
+          type: "type_navgo",
+          type_navgo: {
+            type: "type_mini_app_custom_event_item",
+          },
+          url: window.location.href,
+          vk_platform: queryParams.vk_platform,
+          event,
+          screen: "main",
+          json: "",
+        },
+      ],
+    };
+    console.info("send mini app event", params);
+    const res = await callApiMethod("statEvents.addMiniApps", params, { token });
+    console.log("mini app event resp", res);
+    return res;
+  }
