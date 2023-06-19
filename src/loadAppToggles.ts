@@ -17,7 +17,7 @@ export interface AppToggles {
         }
       } )
       .catch((e: any) => {
-        console.warn("Fail load execute.toggles use default toggles", e)
+        console.warn('Fail load execute.toggles use default toggles', e)
         return getDefaultToggles();
       })
   };

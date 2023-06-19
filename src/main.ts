@@ -64,10 +64,9 @@ export * from './color';
  */
  export { 
     getDefaultToggles,
-    loadAppToggles,
-
-    AppToggles
+    loadAppToggles
 } from './loadAppToggles';
+export type { AppToggles } from './loadAppToggles';
 export * from './loadAppToggles';
 
 /**
@@ -127,7 +126,6 @@ export * from './loadAppToggles';
     copy,
     getAndroidVersion,
     getIosVersion,
-    isDeviceSupported,
     dynamicSort,
     chunk,
     unique,
@@ -215,3 +213,9 @@ export { classNames } from './vkui/classNames';
 export { classNamesString } from './vkui/classNames';
 
 export { isWebView } from './isWebView';
+
+export { LaunchParams, Scope, ViewerGroupRole } from './miniapp/getLaunchParams';
+export { getLaunchParams } from './miniapp/getLaunchParams';
+export { useLaunchParams } from './miniapp/useLaunchParams';
+
+export { compareDates } from './tools/compareDates';

@@ -2,7 +2,7 @@ export const Request = (url: string, params: any, updatedParams: any) => new Pro
     const preparedParams = Object.keys(params).reduce((a, x) => {
         a += `${x}=${updatedParams[x]}&`;
         return a;
-    }, "");
+    }, '');
 
     fetch(url + '?' + preparedParams)
         .then((response) => response.json())

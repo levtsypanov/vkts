@@ -1,5 +1,3 @@
-import React from 'react';
-
 // Перенос предлогов
 export const fixTypography = (string: string, wordLength: number = 3): string | undefined => {
     if (!string) return;
@@ -7,18 +5,7 @@ export const fixTypography = (string: string, wordLength: number = 3): string | 
     strSplit = strSplit.map((str: string) => (str.length <= wordLength ? str + "\u00A0" : str + " ")); // если слово 3 символа, вставляем символ пробела
     strSplit = strSplit.join(""); // возвращаем обратно массив в строку
     return strSplit;
-  };
-
-interface TypoProps {
-  children: React.ReactNode;
-}
-
-export function Typo({ children }: TypoProps): React.ReactNode {
-  if (typeof children !== 'string') {
-    return children;
-  }
-  return fixTypography(children as string);
-}
+};
 
 // pluralize(21, ['пользователь', 'пользователя', 'пользователей'])
 export function pluralize(number: number, titles: string[]) {

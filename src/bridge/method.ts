@@ -1,21 +1,21 @@
-import bridge from "@vkontakte/vk-bridge";
+import bridge from '@vkontakte/vk-bridge';
 
 const reduceHandler = (acc: any, item: any, i: any) => {
-    if (i === 0 && !item.includes("=")) return { ...acc, shortId: parseInt(item, 10), shortValue: item, [item]: item };
-    const [key, value] = decodeURIComponent(item).split("=");
+    if (i === 0 && !item.includes('=')) return { ...acc, shortId: parseInt(item, 10), shortValue: item, [item]: item };
+    const [key, value] = decodeURIComponent(item).split('=');
     return key ? { ...acc, [key]: value } : acc;
   };
 
-export const queryParams = window.location.search.replace("?", "").split("&").reduce(reduceHandler, {});
+export const queryParams = window.location.search.replace('?', '').split('&').reduce(reduceHandler, {});
 
 // получение токена пользователя
 export const getUserToken = async (setUserToken: string, app_id: number) => {
-  let token = "";
+  let token = '';
 
   await bridge
-    .send("VKWebAppGetAuthToken", {
+    .send('VKWebAppGetAuthToken', {
       app_id: app_id,
-      scope: "friends,wall,photos, stories",
+      scope: 'friends,wall,photos, stories',
     })
     .then((res) => {
       token = res.access_token;
@@ -24,9 +24,9 @@ export const getUserToken = async (setUserToken: string, app_id: number) => {
 
   if (!token) {
     await bridge
-      .send("VKWebAppGetAuthToken", {
+      .send('VKWebAppGetAuthToken', {
         app_id: app_id,
-        scope: "friends,wall,photos, stories",
+        scope: 'friends,wall,photos, stories',
       })
       .then((res) => {
         token = res.access_token;
@@ -44,7 +44,7 @@ export function subscribeMessageFromGroupDefault(
   nextPage: any
 ) {
   bridge
-    .send("VKWebAppAllowMessagesFromGroup", {
+    .send('VKWebAppAllowMessagesFromGroup', {
       group_id: groupIDsubscription,
     })
     .then((res) => {
@@ -52,7 +52,7 @@ export function subscribeMessageFromGroupDefault(
     })
     .catch((err) => {
       bridge
-        .send("VKWebAppAllowMessagesFromGroup", {
+        .send('VKWebAppAllowMessagesFromGroup', {
           group_id: groupIDsubscription,
         })
         .then((res) => {
@@ -60,7 +60,7 @@ export function subscribeMessageFromGroupDefault(
         })
         .catch((err) => {
           bridge
-            .send("VKWebAppAllowMessagesFromGroup", {
+            .send('VKWebAppAllowMessagesFromGroup', {
               group_id: groupIDsubscription,
             })
             .then((res) => {
@@ -80,7 +80,7 @@ export function subscribeMessageFromGroupTasks(
   typeState: any
 ) {
   bridge
-    .send("VKWebAppAllowMessagesFromGroup", {
+    .send('VKWebAppAllowMessagesFromGroup', {
       group_id: groupIDsubscription,
     })
     .then((res) => {
@@ -89,7 +89,7 @@ export function subscribeMessageFromGroupTasks(
     .catch((err) => {
       openAlert(
         `Чтобы узнать результат, разрешите отправку сообщений от имени группы`,
-        "red"
+        'red'
       );
       typeState(false);
     });
@@ -97,13 +97,13 @@ export function subscribeMessageFromGroupTasks(
 
 export function addGroup(group_id: number, page: string) {
   bridge
-    .send("VKWebAppJoinGroup", { group_id: group_id })
+    .send('VKWebAppJoinGroup', { group_id: group_id })
     .then(({ result }) => {
       // incrementCountButton(`stats.buttonPage_${page}`);
     })
     .catch((err) => {
       bridge
-        .send("VKWebAppJoinGroup", { group_id: group_id })
+        .send('VKWebAppJoinGroup', { group_id: group_id })
         .then(({ result }) => {
           // incrementCountButton(`stats.buttonPage_${page}`);
         });
@@ -113,7 +113,7 @@ export function addGroup(group_id: number, page: string) {
 // добавление сервиса в сообщество
 export function AddToCommunity() {
   bridge
-    .send("VKWebAppAddToCommunity", {})
+    .send('VKWebAppAddToCommunity', {})
     .then((res) => {
       if (res.group_id) {
         return true;
@@ -126,7 +126,7 @@ export function AddToCommunity() {
 
 // открытие др приложение
 export function goToApp(app_id: number) {
-  bridge.send("VKWebAppOpenApp", { app_id: app_id, location: "GLI" });
+  bridge.send('VKWebAppOpenApp', { app_id: app_id, location: 'GLI' });
 }
 
 export const returnMethod = async (count: any, asyncFn: any, fn: any, page: any) => {
@@ -157,7 +157,7 @@ export const returnAsyncMethod = async (arr: any, seconds: any) => {
 };
 
 export function shareLink(link: string) {
-  bridge.send("VKWebAppShare", {
+  bridge.send('VKWebAppShare', {
     link: link,
   });
 }
@@ -165,15 +165,15 @@ export function shareLink(link: string) {
 // Копирование в буфер
 export function copyLink(openAlert: any, link: string) {
   bridge
-    .send("VKWebAppGetClientVersion")
+    .send('VKWebAppGetClientVersion')
     .then((result) => {
-      if (result.platform === "web" || result.platform === "mobile-web") {
+      if (result.platform === 'web' || result.platform === 'mobile-web') {
         window.navigator.clipboard.writeText(link).then(
           () => { },
           () => { }
         );
       } else {
-        bridge.send("VKWebAppCopyText", { text: link });
+        bridge.send('VKWebAppCopyText', { text: link });
       }
     })
     .catch((error) => { });
@@ -187,7 +187,7 @@ export function share(e: any, urlSharing: any, app_id: number) {
   const urlPhotoWall = `${urlSharing},https://vk.com/app${app_id}`;
   const text = `Узнай если не боишься! Приложение - ${url}`;
 
-  bridge.send("VKWebAppShowWallPostBox", {
+  bridge.send('VKWebAppShowWallPostBox', {
     message: text,
     attachments: urlPhotoWall,
   });
@@ -195,7 +195,7 @@ export function share(e: any, urlSharing: any, app_id: number) {
 
 export const getAppGetLaunchParams = async () => {
   return await bridge
-    .send("VKWebAppGetLaunchParams", {})
+    .send('VKWebAppGetLaunchParams', {})
     .then((data) => {
       if (data) {
         return data;
@@ -208,7 +208,7 @@ export const getAppGetLaunchParams = async () => {
 
 export const getUserProfileInfo = async (user_id: number) => {
   return await bridge
-    .send("VKWebAppGetUserInfo", {
+    .send('VKWebAppGetUserInfo', {
       user_id: user_id,
     })
     .then((data) => {
@@ -223,9 +223,9 @@ export const getUserProfileInfo = async (user_id: number) => {
 
 export const getPermissionForPhotos = async (app_id: number) => {
   return await bridge
-    .send("VKWebAppGetAuthToken", {
+    .send('VKWebAppGetAuthToken', {
       app_id: app_id,
-      scope: "photo",
+      scope: 'photo',
     })
     .then((data) => {
       if (data.access_token) {
@@ -282,14 +282,14 @@ export const getUserProfilePhoto = async () => {
 };
 
 export const subscribeToPush = () => {
-    return bridge.send("VKWebAppAllowNotifications");
+    return bridge.send('VKWebAppAllowNotifications');
 };
 
 export async function callApiMethod(method: any, params: any, { token }: any = {}) {
-    const resp = await bridge.send("VKWebAppCallAPIMethod", {
+    const resp = await bridge.send('VKWebAppCallAPIMethod', {
       method: method,
       params: {
-        v: "5.158",
+        v: '5.158',
         ...params,
         access_token: token,
       },
@@ -305,20 +305,20 @@ export async function sendMiniAppEvent(event: any, customAppId: number, token: s
         {
           user_id: userId,
           mini_app_id: customAppId || appId,
-          type: "type_navgo",
+          type: 'type_navgo',
           type_navgo: {
-            type: "type_mini_app_custom_event_item",
+            type: 'type_mini_app_custom_event_item',
           },
           url: window.location.href,
           vk_platform: queryParams.vk_platform,
           event,
-          screen: "main",
-          json: "",
+          screen: 'main',
+          json: '',
         },
       ],
     };
-    console.info("send mini app event", params);
-    const res = await callApiMethod("statEvents.addMiniApps", params, { token });
-    console.log("mini app event resp", res);
+    console.info('send mini app event', params);
+    const res = await callApiMethod('statEvents.addMiniApps', params, { token });
+    console.log('mini app event resp', res);
     return res;
   }

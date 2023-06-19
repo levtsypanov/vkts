@@ -1,9 +1,9 @@
 let domain: any = null;
 
-const scripts = document.getElementsByTagName("script");
+const scripts = document.getElementsByTagName('script');
 for (let i = 0; i < scripts.length; i++) {
     const scriptSrc = scripts[i].src;
-    if (scriptSrc.includes("/env.js")) {
+    if (scriptSrc.includes('/env.js')) {
         domain = new URL(scriptSrc).host;
     }
 }

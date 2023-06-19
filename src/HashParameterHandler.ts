@@ -12,8 +12,8 @@ export class HashParameterHandler {
 
     static getParametersFromHash(string: string) {
         let search = string
-        return search === "" ? null : search.split("&").reduce((prev: any, curr: any) => {
-            const [key, value] = curr.split("=");
+        return search === '' ? null : search.split('&').reduce((prev: any, curr: any) => {
+            const [key, value] = curr.split('=');
             prev[decodeURIComponent(key)] = decodeURIComponent(value);
             return prev;
         }, {})

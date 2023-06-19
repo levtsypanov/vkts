@@ -1,7 +1,7 @@
-import i18n from "i18next";
-import LanguageDetector from "i18next-browser-languagedetector";
-import { initReactI18next } from "react-i18next";
-import HttpApi from "i18next-http-backend";
+import i18n from 'i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
+import { initReactI18next } from 'react-i18next';
+import HttpApi from 'i18next-http-backend';
 
 const i18nInstance = i18n.createInstance();
 i18nInstance
@@ -9,10 +9,10 @@ i18nInstance
     .use(LanguageDetector)
     .use(initReactI18next)
     .init({
-        fallbackLng: "en",
+        fallbackLng: 'en',
         debug: false,
-        ns: ["translations"],
-        defaultNS: "translations",
+        ns: ['translations'],
+        defaultNS: 'translations',
         interpolation: {
             escapeValue: true
         }

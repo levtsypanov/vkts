@@ -1,7 +1,7 @@
 export function isWebView(): any {
     const webView = [
-        "(Version/4.0|Version/4.1|Version/4.2|Version/4.3|Version/4.4|Version/5.0)",
-        "wv",
+        '(Version/4.0|Version/4.1|Version/4.2|Version/4.3|Version/4.4|Version/5.0)',
+        'wv',
     ].join("|");
 
     const androidRegex = new RegExp(

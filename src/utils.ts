@@ -303,10 +303,11 @@ export function getIosVersion() {
 
 /*
 	Проверка на поддерживаемые версии iOS и Android
-*/
+
 export function isDeviceSupported() {
 	return !(getAndroidVersion() && getAndroidVersion() <= 4) || (getIosVersion() && getIosVersion() <= 8)
 }
+*/
 
 /*
 	Сортирует объект по ключу
