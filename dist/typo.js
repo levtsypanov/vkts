@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.pluralize = exports.Typo = exports.fixTypography = void 0;
+exports.pluralize = exports.fixTypography = void 0;
 // Перенос предлогов
 const fixTypography = (string, wordLength = 3) => {
     if (!string)
@@ -11,13 +11,6 @@ const fixTypography = (string, wordLength = 3) => {
     return strSplit;
 };
 exports.fixTypography = fixTypography;
-function Typo({ children }) {
-    if (typeof children !== 'string') {
-        return children;
-    }
-    return (0, exports.fixTypography)(children);
-}
-exports.Typo = Typo;
 // pluralize(21, ['пользователь', 'пользователя', 'пользователей'])
 function pluralize(number, titles) {
     const cases = [2, 0, 1, 1, 1, 2];

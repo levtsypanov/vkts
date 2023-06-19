@@ -2,10 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getImage300Width = exports.getLargestVkPhoto = exports.i = void 0;
 let domain = null;
-const scripts = document.getElementsByTagName("script");
+const scripts = document.getElementsByTagName('script');
 for (let i = 0; i < scripts.length; i++) {
     const scriptSrc = scripts[i].src;
-    if (scriptSrc.includes("/env.js")) {
+    if (scriptSrc.includes('/env.js')) {
         domain = new URL(scriptSrc).host;
     }
 }

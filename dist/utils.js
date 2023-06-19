@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.copy = exports.getPlatform = exports.currentScheme = exports.getQueryVariable = exports.isJsonString = exports.getNewRequestId = exports.findObjectIndex = exports.findObjectById = exports.getLocalStorage = exports.setLocalStorage = exports.isKeyInObj = exports.fullScreen = exports.declOfNum = exports.unique = exports.chunk = exports.dynamicSort = exports.isDeviceSupported = exports.getIosVersion = exports.getAndroidVersion = exports._inlineShare = exports.desktopShare = exports.getHash = exports.getParams = exports.isRetina = exports.throwDevError = exports.devLog = exports.devErrorLog = exports.getCurrencyAmount = exports.getLangPlural = exports.rusDate = exports.randInt = exports.disableEAndMinusOnKeyDown = exports.schemeChanger = exports.FireEvent = exports.pluralize = exports.fixTypography = void 0;
+exports.copy = exports.getPlatform = exports.currentScheme = exports.getQueryVariable = exports.isJsonString = exports.getNewRequestId = exports.findObjectIndex = exports.findObjectById = exports.getLocalStorage = exports.setLocalStorage = exports.isKeyInObj = exports.fullScreen = exports.declOfNum = exports.unique = exports.chunk = exports.dynamicSort = exports.getIosVersion = exports.getAndroidVersion = exports._inlineShare = exports.desktopShare = exports.getHash = exports.getParams = exports.isRetina = exports.throwDevError = exports.devLog = exports.devErrorLog = exports.getCurrencyAmount = exports.getLangPlural = exports.rusDate = exports.randInt = exports.disableEAndMinusOnKeyDown = exports.schemeChanger = exports.FireEvent = exports.pluralize = exports.fixTypography = void 0;
 const moment_1 = __importDefault(require("moment"));
 const vk_bridge_1 = __importDefault(require("@vkontakte/vk-bridge"));
 const vkui_1 = require("@vkontakte/vkui");
@@ -303,11 +303,11 @@ function getIosVersion() {
 exports.getIosVersion = getIosVersion;
 /*
     Проверка на поддерживаемые версии iOS и Android
-*/
-function isDeviceSupported() {
-    return !(getAndroidVersion() && getAndroidVersion() <= 4) || (getIosVersion() && getIosVersion() <= 8);
+
+export function isDeviceSupported() {
+    return !(getAndroidVersion() && getAndroidVersion() <= 4) || (getIosVersion() && getIosVersion() <= 8)
 }
-exports.isDeviceSupported = isDeviceSupported;
+*/
 /*
     Сортирует объект по ключу
 */

@@ -1,12 +1,12 @@
 "use strict";
 window.___APP_CONFIG___ = {
-    stageBackUrl: "",
-    prodBackUrl: "",
-    vkAPIV: "5.131",
+    stageBackUrl: '',
+    prodBackUrl: '',
+    vkAPIV: '5.131',
     countryId: 1,
     appShortNames: {
-        1234567: "",
+        1234567: '',
     },
-    exchangeChatLink: "",
+    exchangeChatLink: '',
     maxTicketsCount: 25,
 };

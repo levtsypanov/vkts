@@ -42,7 +42,8 @@ export * from './incline';
 /**
  *  To work with switches (Available only for developers)
  */
-export { getDefaultToggles, loadAppToggles, AppToggles } from './loadAppToggles';
+export { getDefaultToggles, loadAppToggles } from './loadAppToggles';
+export type { AppToggles } from './loadAppToggles';
 export * from './loadAppToggles';
 /**
  *  @ignore
@@ -72,7 +73,7 @@ export * from './UseNullableContext';
 /**
  *  All Utilites
  */
-export { fixTypography, pluralize, FireEvent, schemeChanger, disableEAndMinusOnKeyDown, randInt, rusDate, getLangPlural, getCurrencyAmount, devErrorLog, devLog, throwDevError, isRetina, getParams, getHash, desktopShare, _inlineShare, getQueryVariable, currentScheme, getPlatform, copy, getAndroidVersion, getIosVersion, isDeviceSupported, dynamicSort, chunk, unique, declOfNum, fullScreen, isKeyInObj, setLocalStorage, getLocalStorage, findObjectById, findObjectIndex, getNewRequestId, isJsonString } from './utils';
+export { fixTypography, pluralize, FireEvent, schemeChanger, disableEAndMinusOnKeyDown, randInt, rusDate, getLangPlural, getCurrencyAmount, devErrorLog, devLog, throwDevError, isRetina, getParams, getHash, desktopShare, _inlineShare, getQueryVariable, currentScheme, getPlatform, copy, getAndroidVersion, getIosVersion, dynamicSort, chunk, unique, declOfNum, fullScreen, isKeyInObj, setLocalStorage, getLocalStorage, findObjectById, findObjectIndex, getNewRequestId, isJsonString } from './utils';
 export * from './utils';
 /**
  *  For working with VKontakte communities
@@ -119,3 +120,7 @@ export { isNumeric, isFunction, leadingZero, isPrimitiveReactNode, noop } from '
 export { classNames } from './vkui/classNames';
 export { classNamesString } from './vkui/classNames';
 export { isWebView } from './isWebView';
+export { LaunchParams, Scope, ViewerGroupRole } from './miniapp/getLaunchParams';
+export { getLaunchParams } from './miniapp/getLaunchParams';
+export { useLaunchParams } from './miniapp/useLaunchParams';
+export { compareDates } from './tools/compareDates';

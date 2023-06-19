@@ -13,10 +13,10 @@ i18nInstance
     .use(i18next_browser_languagedetector_1.default)
     .use(react_i18next_1.initReactI18next)
     .init({
-    fallbackLng: "en",
+    fallbackLng: 'en',
     debug: false,
-    ns: ["translations"],
-    defaultNS: "translations",
+    ns: ['translations'],
+    defaultNS: 'translations',
     interpolation: {
         escapeValue: true
     }

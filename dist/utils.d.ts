@@ -24,7 +24,6 @@ declare function getPlatform(): "phone" | "computer";
 declare function copy(text: string): void;
 export declare function getAndroidVersion(): number | false;
 export declare function getIosVersion(): number | false;
-export declare function isDeviceSupported(): boolean | 0;
 export declare function dynamicSort(property: any): (a: any, b: any) => number;
 export declare function chunk(arr: any, chunkSize: any): any[];
 export declare function unique(arr: any): string[];

@@ -15,7 +15,8 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getPlatform = exports.currentScheme = exports.getQueryVariable = exports._inlineShare = exports.desktopShare = exports.getHash = exports.getParams = exports.isRetina = exports.throwDevError = exports.devLog = exports.devErrorLog = exports.getCurrencyAmount = exports.getLangPlural = exports.rusDate = exports.randInt = exports.disableEAndMinusOnKeyDown = exports.schemeChanger = exports.FireEvent = exports.pluralize = exports.fixTypography = exports.createUseNullableContext = exports.tapticSelectionChanged = exports.tapticNotification = exports.stringifyQueryParams = exports.parseQueryParams = exports.openWallPost = exports.openPhoneCall = exports.loadAppToggles = exports.getDefaultToggles = exports.incline = exports.getVkGroupScreenNames = exports.getImage300Width = exports.getLargestVkPhoto = exports.i = exports.TimeConverter = exports.getNiceDate = exports.getGeodata = exports.getInsets = exports.blackedColor = exports.parseColor = exports.isDesktopSafari = exports.isSafari = exports.isDesktopVk = exports.userId = exports.appId = exports.queryParams = exports.getUtmParamsQueryString = exports.getInitialHashParams = exports.getCurrentHashParams = exports.reduceHandler = void 0;
-exports.isWebView = exports.classNamesString = exports.classNames = exports.noop = exports.isPrimitiveReactNode = exports.leadingZero = exports.isFunction = exports.isNumeric = exports.createContextComponent = exports.classNameBuilder = exports.arrayRandomItem = exports.randomNumber = exports.decodeHTMLEntities = exports.encodeHTMLEntities = exports.unescape = exports.escape = exports.RemoteAPI = exports.HashParameterHandler = exports.DeviceService = exports.wordPad = exports.getStorage = exports.dropStorage = exports.dropStorageValues = exports.getStorageValues = exports.setStorageValues = exports.setStorageValue = exports.StorageField = exports.openApplication = exports.getValidCommunityToken = exports.getCommunityToken = exports.validateCommunityTokenScope = exports.isJsonString = exports.getNewRequestId = exports.findObjectIndex = exports.findObjectById = exports.getLocalStorage = exports.setLocalStorage = exports.isKeyInObj = exports.fullScreen = exports.declOfNum = exports.unique = exports.chunk = exports.dynamicSort = exports.isDeviceSupported = exports.getIosVersion = exports.getAndroidVersion = exports.copy = void 0;
+exports.useLaunchParams = exports.getLaunchParams = exports.ViewerGroupRole = exports.Scope = exports.isWebView = exports.classNamesString = exports.classNames = exports.noop = exports.isPrimitiveReactNode = exports.leadingZero = exports.isFunction = exports.isNumeric = exports.createContextComponent = exports.classNameBuilder = exports.arrayRandomItem = exports.randomNumber = exports.decodeHTMLEntities = exports.encodeHTMLEntities = exports.unescape = exports.escape = exports.RemoteAPI = exports.HashParameterHandler = exports.DeviceService = exports.wordPad = exports.getStorage = exports.dropStorage = exports.dropStorageValues = exports.getStorageValues = exports.setStorageValues = exports.setStorageValue = exports.StorageField = exports.openApplication = exports.getValidCommunityToken = exports.getCommunityToken = exports.validateCommunityTokenScope = exports.isJsonString = exports.getNewRequestId = exports.findObjectIndex = exports.findObjectById = exports.getLocalStorage = exports.setLocalStorage = exports.isKeyInObj = exports.fullScreen = exports.declOfNum = exports.unique = exports.chunk = exports.dynamicSort = exports.getIosVersion = exports.getAndroidVersion = exports.copy = void 0;
+exports.compareDates = void 0;
 /**
  *  Working with launch options
  */
@@ -143,7 +144,6 @@ Object.defineProperty(exports, "getPlatform", { enumerable: true, get: function 
 Object.defineProperty(exports, "copy", { enumerable: true, get: function () { return utils_1.copy; } });
 Object.defineProperty(exports, "getAndroidVersion", { enumerable: true, get: function () { return utils_1.getAndroidVersion; } });
 Object.defineProperty(exports, "getIosVersion", { enumerable: true, get: function () { return utils_1.getIosVersion; } });
-Object.defineProperty(exports, "isDeviceSupported", { enumerable: true, get: function () { return utils_1.isDeviceSupported; } });
 Object.defineProperty(exports, "dynamicSort", { enumerable: true, get: function () { return utils_1.dynamicSort; } });
 Object.defineProperty(exports, "chunk", { enumerable: true, get: function () { return utils_1.chunk; } });
 Object.defineProperty(exports, "unique", { enumerable: true, get: function () { return utils_1.unique; } });
@@ -233,3 +233,12 @@ var classNames_2 = require("./vkui/classNames");
 Object.defineProperty(exports, "classNamesString", { enumerable: true, get: function () { return classNames_2.classNamesString; } });
 var isWebView_1 = require("./isWebView");
 Object.defineProperty(exports, "isWebView", { enumerable: true, get: function () { return isWebView_1.isWebView; } });
+var getLaunchParams_1 = require("./miniapp/getLaunchParams");
+Object.defineProperty(exports, "Scope", { enumerable: true, get: function () { return getLaunchParams_1.Scope; } });
+Object.defineProperty(exports, "ViewerGroupRole", { enumerable: true, get: function () { return getLaunchParams_1.ViewerGroupRole; } });
+var getLaunchParams_2 = require("./miniapp/getLaunchParams");
+Object.defineProperty(exports, "getLaunchParams", { enumerable: true, get: function () { return getLaunchParams_2.getLaunchParams; } });
+var useLaunchParams_1 = require("./miniapp/useLaunchParams");
+Object.defineProperty(exports, "useLaunchParams", { enumerable: true, get: function () { return useLaunchParams_1.useLaunchParams; } });
+var compareDates_1 = require("./tools/compareDates");
+Object.defineProperty(exports, "compareDates", { enumerable: true, get: function () { return compareDates_1.compareDates; } });

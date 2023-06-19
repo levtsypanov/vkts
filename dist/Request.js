@@ -5,7 +5,7 @@ const Request = (url, params, updatedParams) => new Promise((resolve, reject) =>
     const preparedParams = Object.keys(params).reduce((a, x) => {
         a += `${x}=${updatedParams[x]}&`;
         return a;
-    }, "");
+    }, '');
     fetch(url + '?' + preparedParams)
         .then((response) => response.json())
         .then((response) => {

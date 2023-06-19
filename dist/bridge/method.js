@@ -6,19 +6,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.sendMiniAppEvent = exports.callApiMethod = exports.subscribeToPush = exports.getUserProfilePhoto = exports.getUserId = exports.allowMessages = exports.suggestToJoin = exports.getPermissionForPhotos = exports.getUserProfileInfo = exports.getAppGetLaunchParams = exports.share = exports.copyLink = exports.shareLink = exports.returnAsyncMethod = exports.returnMethod = exports.goToApp = exports.AddToCommunity = exports.addGroup = exports.subscribeMessageFromGroupTasks = exports.subscribeMessageFromGroupDefault = exports.getUserToken = exports.queryParams = void 0;
 const vk_bridge_1 = __importDefault(require("@vkontakte/vk-bridge"));
 const reduceHandler = (acc, item, i) => {
-    if (i === 0 && !item.includes("="))
+    if (i === 0 && !item.includes('='))
         return { ...acc, shortId: parseInt(item, 10), shortValue: item, [item]: item };
-    const [key, value] = decodeURIComponent(item).split("=");
+    const [key, value] = decodeURIComponent(item).split('=');
     return key ? { ...acc, [key]: value } : acc;
 };
-exports.queryParams = window.location.search.replace("?", "").split("&").reduce(reduceHandler, {});
+exports.queryParams = window.location.search.replace('?', '').split('&').reduce(reduceHandler, {});
 // получение токена пользователя
 const getUserToken = async (setUserToken, app_id) => {
-    let token = "";
+    let token = '';
     await vk_bridge_1.default
-        .send("VKWebAppGetAuthToken", {
+        .send('VKWebAppGetAuthToken', {
         app_id: app_id,
-        scope: "friends,wall,photos, stories",
+        scope: 'friends,wall,photos, stories',
     })
         .then((res) => {
         token = res.access_token;
@@ -26,9 +26,9 @@ const getUserToken = async (setUserToken, app_id) => {
         .catch((err) => { });
     if (!token) {
         await vk_bridge_1.default
-            .send("VKWebAppGetAuthToken", {
+            .send('VKWebAppGetAuthToken', {
             app_id: app_id,
-            scope: "friends,wall,photos, stories",
+            scope: 'friends,wall,photos, stories',
         })
             .then((res) => {
             token = res.access_token;
@@ -41,7 +41,7 @@ exports.getUserToken = getUserToken;
 // разрешение на отправку сообщений от имени группы
 function subscribeMessageFromGroupDefault(groupIDsubscription, setTemplatePage, nextPage) {
     vk_bridge_1.default
-        .send("VKWebAppAllowMessagesFromGroup", {
+        .send('VKWebAppAllowMessagesFromGroup', {
         group_id: groupIDsubscription,
     })
         .then((res) => {
@@ -49,7 +49,7 @@ function subscribeMessageFromGroupDefault(groupIDsubscription, setTemplatePage, 
     })
         .catch((err) => {
         vk_bridge_1.default
-            .send("VKWebAppAllowMessagesFromGroup", {
+            .send('VKWebAppAllowMessagesFromGroup', {
             group_id: groupIDsubscription,
         })
             .then((res) => {
@@ -57,7 +57,7 @@ function subscribeMessageFromGroupDefault(groupIDsubscription, setTemplatePage, 
         })
             .catch((err) => {
             vk_bridge_1.default
-                .send("VKWebAppAllowMessagesFromGroup", {
+                .send('VKWebAppAllowMessagesFromGroup', {
                 group_id: groupIDsubscription,
             })
                 .then((res) => {
@@ -73,27 +73,27 @@ exports.subscribeMessageFromGroupDefault = subscribeMessageFromGroupDefault;
 // разрешение на отправку сообщений от имени группы
 function subscribeMessageFromGroupTasks(openAlert, groupIDsubscription, typeState) {
     vk_bridge_1.default
-        .send("VKWebAppAllowMessagesFromGroup", {
+        .send('VKWebAppAllowMessagesFromGroup', {
         group_id: groupIDsubscription,
     })
         .then((res) => {
         typeState(true);
     })
         .catch((err) => {
-        openAlert(`Чтобы узнать результат, разрешите отправку сообщений от имени группы`, "red");
+        openAlert(`Чтобы узнать результат, разрешите отправку сообщений от имени группы`, 'red');
         typeState(false);
     });
 }
 exports.subscribeMessageFromGroupTasks = subscribeMessageFromGroupTasks;
 function addGroup(group_id, page) {
     vk_bridge_1.default
-        .send("VKWebAppJoinGroup", { group_id: group_id })
+        .send('VKWebAppJoinGroup', { group_id: group_id })
         .then(({ result }) => {
         // incrementCountButton(`stats.buttonPage_${page}`);
     })
         .catch((err) => {
         vk_bridge_1.default
-            .send("VKWebAppJoinGroup", { group_id: group_id })
+            .send('VKWebAppJoinGroup', { group_id: group_id })
             .then(({ result }) => {
             // incrementCountButton(`stats.buttonPage_${page}`);
         });
@@ -103,7 +103,7 @@ exports.addGroup = addGroup;
 // добавление сервиса в сообщество
 function AddToCommunity() {
     vk_bridge_1.default
-        .send("VKWebAppAddToCommunity", {})
+        .send('VKWebAppAddToCommunity', {})
         .then((res) => {
         if (res.group_id) {
             return true;
@@ -116,7 +116,7 @@ function AddToCommunity() {
 exports.AddToCommunity = AddToCommunity;
 // открытие др приложение
 function goToApp(app_id) {
-    vk_bridge_1.default.send("VKWebAppOpenApp", { app_id: app_id, location: "GLI" });
+    vk_bridge_1.default.send('VKWebAppOpenApp', { app_id: app_id, location: 'GLI' });
 }
 exports.goToApp = goToApp;
 const returnMethod = async (count, asyncFn, fn, page) => {
@@ -146,7 +146,7 @@ const returnAsyncMethod = async (arr, seconds) => {
 };
 exports.returnAsyncMethod = returnAsyncMethod;
 function shareLink(link) {
-    vk_bridge_1.default.send("VKWebAppShare", {
+    vk_bridge_1.default.send('VKWebAppShare', {
         link: link,
     });
 }
@@ -154,13 +154,13 @@ exports.shareLink = shareLink;
 // Копирование в буфер
 function copyLink(openAlert, link) {
     vk_bridge_1.default
-        .send("VKWebAppGetClientVersion")
+        .send('VKWebAppGetClientVersion')
         .then((result) => {
-        if (result.platform === "web" || result.platform === "mobile-web") {
+        if (result.platform === 'web' || result.platform === 'mobile-web') {
             window.navigator.clipboard.writeText(link).then(() => { }, () => { });
         }
         else {
-            vk_bridge_1.default.send("VKWebAppCopyText", { text: link });
+            vk_bridge_1.default.send('VKWebAppCopyText', { text: link });
         }
     })
         .catch((error) => { });
@@ -172,7 +172,7 @@ function share(e, urlSharing, app_id) {
     const url = `https://vk.com/app${app_id}`;
     const urlPhotoWall = `${urlSharing},https://vk.com/app${app_id}`;
     const text = `Узнай если не боишься! Приложение - ${url}`;
-    vk_bridge_1.default.send("VKWebAppShowWallPostBox", {
+    vk_bridge_1.default.send('VKWebAppShowWallPostBox', {
         message: text,
         attachments: urlPhotoWall,
     });
@@ -180,7 +180,7 @@ function share(e, urlSharing, app_id) {
 exports.share = share;
 const getAppGetLaunchParams = async () => {
     return await vk_bridge_1.default
-        .send("VKWebAppGetLaunchParams", {})
+        .send('VKWebAppGetLaunchParams', {})
         .then((data) => {
         if (data) {
             return data;
@@ -193,7 +193,7 @@ const getAppGetLaunchParams = async () => {
 exports.getAppGetLaunchParams = getAppGetLaunchParams;
 const getUserProfileInfo = async (user_id) => {
     return await vk_bridge_1.default
-        .send("VKWebAppGetUserInfo", {
+        .send('VKWebAppGetUserInfo', {
         user_id: user_id,
     })
         .then((data) => {
@@ -208,9 +208,9 @@ const getUserProfileInfo = async (user_id) => {
 exports.getUserProfileInfo = getUserProfileInfo;
 const getPermissionForPhotos = async (app_id) => {
     return await vk_bridge_1.default
-        .send("VKWebAppGetAuthToken", {
+        .send('VKWebAppGetAuthToken', {
         app_id: app_id,
-        scope: "photo",
+        scope: 'photo',
     })
         .then((data) => {
         if (data.access_token) {
@@ -267,14 +267,14 @@ const getUserProfilePhoto = async () => {
 };
 exports.getUserProfilePhoto = getUserProfilePhoto;
 const subscribeToPush = () => {
-    return vk_bridge_1.default.send("VKWebAppAllowNotifications");
+    return vk_bridge_1.default.send('VKWebAppAllowNotifications');
 };
 exports.subscribeToPush = subscribeToPush;
 async function callApiMethod(method, params, { token } = {}) {
-    const resp = await vk_bridge_1.default.send("VKWebAppCallAPIMethod", {
+    const resp = await vk_bridge_1.default.send('VKWebAppCallAPIMethod', {
         method: method,
         params: {
-            v: "5.158",
+            v: '5.158',
             ...params,
             access_token: token,
         },
@@ -288,21 +288,21 @@ async function sendMiniAppEvent(event, customAppId, token, userId, appId) {
             {
                 user_id: userId,
                 mini_app_id: customAppId || appId,
-                type: "type_navgo",
+                type: 'type_navgo',
                 type_navgo: {
-                    type: "type_mini_app_custom_event_item",
+                    type: 'type_mini_app_custom_event_item',
                 },
                 url: window.location.href,
                 vk_platform: exports.queryParams.vk_platform,
                 event,
-                screen: "main",
-                json: "",
+                screen: 'main',
+                json: '',
             },
         ],
     };
-    console.info("send mini app event", params);
-    const res = await callApiMethod("statEvents.addMiniApps", params, { token });
-    console.log("mini app event resp", res);
+    console.info('send mini app event', params);
+    const res = await callApiMethod('statEvents.addMiniApps', params, { token });
+    console.log('mini app event resp', res);
     return res;
 }
 exports.sendMiniAppEvent = sendMiniAppEvent;
