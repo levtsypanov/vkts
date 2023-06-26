@@ -1,9 +1,4 @@
 /**
- *  Working with launch options
- */
-export { reduceHandler, getCurrentHashParams, getInitialHashParams, getUtmParamsQueryString, queryParams, appId, userId, isDesktopVk, isSafari, isDesktopSafari, } from './app_params';
-export * from './app_params';
-/**
  *  Working with rgb colors
  */
 export { parseColor, blackedColor } from './color';
