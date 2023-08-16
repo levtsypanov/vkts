@@ -1,10 +1,6 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BytesHelper = void 0;
-const plural_1 = __importDefault(require("./Plural/plural"));
 /**
  * Библиотека для преобразования и форматирования размеров файлов и папок.
  */
@@ -15,14 +11,12 @@ const bounds = [
     1024 ** 4,
     1024 ** 5, // 'ПБ'
 ];
-const units = ['КБ', 'МБ', 'ГБ', 'ТБ', 'ПБ'];
-const unitsEn = ['KB', 'MB', 'GB', 'TB', 'PB'];
+const siUnits = ['КБ', 'МБ', 'ГБ', 'ТБ', 'ПБ'];
+const siUnitsEn = ['KB', 'MB', 'GB', 'TB', 'PB'];
 const bytesInUnit = Object.fromEntries([
-    ...units.map((unit, index) => [unit, bounds[index]]),
-    ...unitsEn.map((unit, index) => [unit, bounds[index]]),
+    ...siUnits.map((unit, index) => [unit, bounds[index]]),
+    ...siUnitsEn.map((unit, index) => [unit, bounds[index]]),
 ]);
-const NO_BREAK_SPACE = '\u00A0';
-const BYTE_CASES = ['байт', 'байта', 'байт'];
 // @ts-ignore (7006) FIXME: Parameter 'value' implicitly has an 'any' type.
 function getDigitsCount(value) {
     return String(value).replace('.', '').length;
@@ -80,7 +74,7 @@ function toNDigits(bytes, maxDigitsCount, divisor) {
         if (getDigitsCount(roundedSpace) > maxDigitsCount) {
             return toNDigits(bytes, maxDigitsCount, divisor * 1024);
         }
-        currUnits = units[bounds.indexOf(divisor)];
+        currUnits = siUnits[bounds.indexOf(divisor)];
     }
     return {
         original: bytes,
@@ -91,29 +85,6 @@ function toNDigits(bytes, maxDigitsCount, divisor) {
 }
 exports.BytesHelper = {
     toNDigits,
-    // @ts-ignore (7006) FIXME: Parameter 'bytes' implicitly has an 'any' type.
-    toHumanFriendlyValue(bytes, fractionDigits = 2) {
-        let value = Number(bytes);
-        let i = units.length;
-        while (i--) {
-            const bound = bounds[i];
-            if (value > bound) {
-                value /= bound;
-                break;
-            }
-        }
-        // Приводим к указанной точности и удаляем ненужные нули.
-        value = parseFloat(value.toFixed(fractionDigits));
-        let unit = units[i];
-        if (!unit) {
-            unit = (0, plural_1.default)(value, BYTE_CASES);
-        }
-        return { value, unit };
-    },
-    toHumanFriendlyString(bytes, fractionDigits) {
-        const { value, unit } = exports.BytesHelper.toHumanFriendlyValue(bytes, fractionDigits);
-        return value + NO_BREAK_SPACE + unit;
-    },
     // all must be ok with translated units
     // @ts-ignore (7006) FIXME: Parameter 'bytes' implicitly has an 'any' type.
     bytesToUnit(bytes, targetUnit, fractionDigits) {
@@ -133,11 +104,17 @@ exports.BytesHelper = {
     bytesToKB(value) {
         return value / 1024;
     },
+    ceilBytesToKB(value) {
+        return Math.ceil(exports.BytesHelper.bytesToKB(value));
+    },
     bytesToMB(value) {
         return value / 1024 ** 2;
     },
-    bytesToGB(value) {
+    bytesToGiB(value) {
         return value / 1024 ** 3;
+    },
+    bytesToGB(value) {
+        return value / 10 ** 9;
     },
     kilobytesToBytes(value) {
         return value * 1024;
@@ -147,6 +124,9 @@ exports.BytesHelper = {
     },
     gigabytesToBytes(value) {
         return value * 1024 ** 3;
+    },
+    standardGigabytesToBytes(value) {
+        return value * 1000 ** 3;
     },
     gigabytesToMegabytes(value) {
         return value * 1024;
@@ -164,10 +144,12 @@ exports.BytesHelper = {
         if (value < 1024 ** 3) {
             return `${exports.BytesHelper.bytesToMB(value).toFixed(2)} MB`;
         }
-        return `${exports.BytesHelper.bytesToGB(value).toFixed(2)} GB`;
+        return `${exports.BytesHelper.bytesToGiB(value).toFixed(2)} GB`;
     },
     enUnitToRu(value) {
-        return units[unitsEn.indexOf(value)];
+        return siUnits[siUnitsEn.indexOf(value)];
     },
-    unitsEn,
+    bounds,
+    siUnits,
+    siUnitsEn,
 };

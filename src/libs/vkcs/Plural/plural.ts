@@ -1,7 +1,7 @@
 /**
  * plural(seconds, ['секунду', 'секунды', 'секунд'])
  */
- export function plural(n: number, [a, b = a, c = b]: string[]) {
+export function plural(n: number, [a, b = a, c = b]: string[]) {
     if (n % 10 === 1 && n % 100 !== 11) {
         return a;
     }

@@ -1,10 +1,10 @@
 {
     "name": "@mini-core/vkts",
-    "version": "1.8.1",
+    "version": "1.8.2",
     "license": "MIT",
     "description": "VK Mini Core shared JS libs",
     "main": "./dist/main.js",
-    "author": "Lev Tsypanov<l.tsypanov@team.vk.com>",
+    "author": "Lev Tsypanov<l.tsypanov@vk.team>",
     "scripts": {
         "build": "tsc --project ./tsconfig.json",
         "lint": "eslint ./src"
