@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 export let requestConfig: { apiVersion?: string, langId?: number | string, apiUrl?: string, access_token?: string } = {};
 
-function useApiRequest(apiMethod: string, requestData: object = {} ) {
+export function apiRequest(apiMethod: string, requestData: object = {} ) {
   const [data, setData] = useState<any>([]);
   const [loading, setLoading] = useState(true);
 
@@ -39,6 +39,4 @@ function useApiRequest(apiMethod: string, requestData: object = {} ) {
   }, []);
 
   return [data, loading];
-}
-
-export { useApiRequest };
+};
