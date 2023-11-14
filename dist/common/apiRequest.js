@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.useApiRequest = exports.requestConfig = void 0;
+exports.apiRequest = exports.requestConfig = void 0;
 const react_1 = require("react");
 exports.requestConfig = {};
-function useApiRequest(apiMethod, requestData = {}) {
+function apiRequest(apiMethod, requestData = {}) {
     const [data, setData] = (0, react_1.useState)([]);
     const [loading, setLoading] = (0, react_1.useState)(true);
     const buildUrl = () => {
@@ -36,4 +36,5 @@ function useApiRequest(apiMethod, requestData = {}) {
     }, []);
     return [data, loading];
 }
-exports.useApiRequest = useApiRequest;
+exports.apiRequest = apiRequest;
+;
