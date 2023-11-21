@@ -4,4 +4,5 @@ export declare let requestConfig: {
     apiUrl?: string;
     access_token?: string;
 };
-export declare function apiRequest(apiMethod: string, requestData?: object): any[];
+declare function apiRequest(apiMethod: string, requestData?: object): Promise<any>;
+export { apiRequest };
