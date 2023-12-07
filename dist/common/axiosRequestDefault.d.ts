@@ -1,5 +1,5 @@
 import { AxiosInstance } from 'axios';
 export declare let axiosRequestConfig: {
-    baseURL: string;
+    baseURL: any;
 };
 export declare const axiosRequestDefault: AxiosInstance;

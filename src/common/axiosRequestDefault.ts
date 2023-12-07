@@ -1,4 +1,4 @@
 import axios, { AxiosInstance } from 'axios';
 
-export let axiosRequestConfig: { baseURL: string } = { baseURL: '' }; // Изменили тип на {baseURL: string}
+export let axiosRequestConfig: { baseURL: any } = { baseURL: '' };
 export const axiosRequestDefault: AxiosInstance = axios.create(axiosRequestConfig);
