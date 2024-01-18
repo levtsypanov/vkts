@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getPlatformClassName = void 0;
-// TODO v6 удалить этот хеллпер
 const platform_1 = require("@vkontakte/vkui/dist/lib/platform");
 function getPlatformClassName(base, osname = (0, platform_1.platform)(), 
 /**

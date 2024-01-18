@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.querystring = void 0;
+exports.ObjectString = exports.querystring = void 0;
 exports.querystring = {
     parse: (string = '') => {
         if (typeof string !== 'string')
@@ -35,3 +35,32 @@ exports.querystring = {
         }, []).join('&');
     }
 };
+function create(data) {
+    return Object.keys(data).reduce((acc, key) => {
+        const item = data[key];
+        const type = typeof item;
+        if (type === 'string' || type === 'number' || type === 'boolean') {
+            acc.push(`${key}=${encodeURIComponent(item)}`);
+        }
+        if (Array.isArray(item)) {
+            item.forEach((value) => {
+                acc.push(`${key}[]=${value}`);
+            });
+        }
+        return acc;
+    }, []).join('&');
+}
+function parse(string) {
+    if (typeof string !== 'string') {
+        return {};
+    }
+    return string.split('&')
+        .reduce((acc, item) => {
+        const [key, value] = item.split('=');
+        if (value !== undefined) {
+            acc[key] = decodeURIComponent(value);
+        }
+        return acc;
+    }, {});
+}
+exports.ObjectString = { create, parse };
