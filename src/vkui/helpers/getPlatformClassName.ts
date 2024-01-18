@@ -1,4 +1,3 @@
-// TODO v6 удалить этот хеллпер
 import { platform, PlatformType } from '@vkontakte/vkui/dist/lib/platform';
 
 /**
