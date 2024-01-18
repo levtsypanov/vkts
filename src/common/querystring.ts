@@ -1,12 +1,19 @@
 interface QueryOptions {
     encode?: boolean;
-  }
+}
   
-  interface QueryData {
+interface QueryData {
     [key: string]: string | number | boolean | string[] | number[] | boolean[];
-  }
+}
+
+type Dictionary<T> = {
+    [key: string]: T;
+};
+
+export type QueryItem = string | number | boolean;
+export type QueryObject = Dictionary<QueryItem | QueryItem[]>;
   
-  export const querystring = {
+export const querystring = {
     parse: (string = ''): QueryData => {
       if (typeof string !== 'string') return {};
       const matches = /\?(.+)$/ig.exec(string);
@@ -38,5 +45,42 @@ interface QueryOptions {
         return acc;
       }, []).join('&');
     }
-  };
+};
+
+function create(data: QueryObject): string {
+  return Object.keys(data).reduce((acc: string[], key) => {
+    const item = data[key];
+    const type = typeof item;
+
+    if (type === 'string' || type === 'number' || type === 'boolean') {
+      acc.push(`${key}=${encodeURIComponent(item as QueryItem)}`);
+    }
+
+    if (Array.isArray(item)) {
+      item.forEach((value) => {
+        acc.push(`${key}[]=${value}`);
+      });
+    }
+
+    return acc;
+  }, []).join('&');
+}
+
+function parse(string: string): QueryObject {
+  if (typeof string !== 'string') {
+    return {};
+  }
+
+  return string.split('&')
+    .reduce((acc: QueryObject, item) => {
+      const [key, value] = item.split('=');
+
+      if (value !== undefined) {
+        acc[key] = decodeURIComponent(value);
+      }
+
+      return acc;
+    }, {});
+}
   
+export const ObjectString = { create, parse };
