@@ -4,11 +4,11 @@ interface QueryOptions {
 interface QueryData {
     [key: string]: string | number | boolean | string[] | number[] | boolean[];
 }
-declare type Dictionary<T> = {
+type Dictionary<T> = {
     [key: string]: T;
 };
-export declare type QueryItem = string | number | boolean;
-export declare type QueryObject = Dictionary<QueryItem | QueryItem[]>;
+export type QueryItem = string | number | boolean;
+export type QueryObject = Dictionary<QueryItem | QueryItem[]>;
 export declare const querystring: {
     parse: (string?: string) => QueryData;
     create: (data?: QueryData, opts?: QueryOptions) => string;

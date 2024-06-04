@@ -1,9 +1,8 @@
-import { SizeType } from '@vkontakte/vkui/dist/lib/adaptivity';
+import { SizeXType } from './types';
 
 /**
  * Note: VKUI оказалось от использования динамических вычислений свойств на мапы, но мы продолжаем их поддержку в частичной форме.
  */
-type SizeXType = SizeType | 'none';
 
 export function getSizeXClassName(base: string, sizeX?: SizeXType): string;
 export function getSizeXClassName<Styles extends Record<string, string>>(

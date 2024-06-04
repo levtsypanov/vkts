@@ -1,4 +1,4 @@
-export declare type debounceType = {
+export type debounceType = {
     func: Function;
     wait: number;
     immediate?: boolean;

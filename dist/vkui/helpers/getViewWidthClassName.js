@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getViewWidthClassName = void 0;
-const adaptivity_1 = require("@vkontakte/vkui/dist/lib/adaptivity");
+const types_1 = require("./types");
 function getViewWidthClassName(base, viewWidth, 
 /**
  * Note: ввиду того, что Typescript не поддерживает `typescript-plugin-css-modules` во время компиляции,
@@ -10,19 +10,19 @@ function getViewWidthClassName(base, viewWidth,
 styles) {
     let className = `${String(base)}--viewWidth-`;
     switch (viewWidth) {
-        case adaptivity_1.ViewWidth.SMALL_MOBILE:
+        case types_1.ViewWidth.SMALL_MOBILE:
             className += 'smallMobile';
             break;
-        case adaptivity_1.ViewWidth.MOBILE:
+        case types_1.ViewWidth.MOBILE:
             className += 'mobile';
             break;
-        case adaptivity_1.ViewWidth.SMALL_TABLET:
+        case types_1.ViewWidth.SMALL_TABLET:
             className += 'smallTablet';
             break;
-        case adaptivity_1.ViewWidth.TABLET:
+        case types_1.ViewWidth.TABLET:
             className += 'tablet';
             break;
-        case adaptivity_1.ViewWidth.DESKTOP:
+        case types_1.ViewWidth.DESKTOP:
             className += 'desktop';
             break;
         default:
@@ -30,7 +30,7 @@ styles) {
             break;
     }
     className = styles ? styles[className] : className;
-    if (viewWidth && viewWidth >= adaptivity_1.ViewWidth.SMALL_TABLET) {
+    if (viewWidth && viewWidth >= types_1.ViewWidth.SMALL_TABLET) {
         if (styles) {
             className += ' ' + styles[`${String(base)}--viewWidth-smallTabletPlus`];
         }
@@ -38,7 +38,7 @@ styles) {
             className += ` ${String(base)}--viewWidth-smallTabletPlus`;
         }
     }
-    if (viewWidth && viewWidth >= adaptivity_1.ViewWidth.TABLET) {
+    if (viewWidth && viewWidth >= types_1.ViewWidth.TABLET) {
         if (styles) {
             className += ' ' + styles[`${String(base)}--viewWidth-tabletPlus`];
         }

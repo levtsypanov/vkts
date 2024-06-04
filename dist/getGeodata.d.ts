@@ -1,4 +1,4 @@
-export declare type GetGeodataResult = {
+export type GetGeodataResult = {
     permission: 'available';
     lat: number;
     long: number;

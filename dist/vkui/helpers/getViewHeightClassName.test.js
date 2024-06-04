@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const adaptivity_1 = require("@vkontakte/vkui/dist/lib/adaptivity");
+const types_1 = require("./types");
 const getViewHeightClassName_1 = require("./getViewHeightClassName");
 /**
  * Note: VKUI оказалось от использования динамических вычислений свойств на мапы, но мы продолжаем их поддержку в частичной форме.
@@ -8,9 +8,9 @@ const getViewHeightClassName_1 = require("./getViewHeightClassName");
 describe('getViewHeightClassName', () => {
     describe('without `styles` argument', () => {
         it("returns 'none' className if there is no viewHeight", () => expect((0, getViewHeightClassName_1.getViewHeightClassName)('base')).toBe('base--viewHeight-none'));
-        it('returns desktop className', () => expect((0, getViewHeightClassName_1.getViewHeightClassName)('base', adaptivity_1.ViewHeight.EXTRA_SMALL)).toBe(`base--viewHeight-extraSmall`));
-        it('returns mobile className', () => expect((0, getViewHeightClassName_1.getViewHeightClassName)('base', adaptivity_1.ViewHeight.MEDIUM)).toBe(`base--viewHeight-medium`));
-        it('returns smallMobile className', () => expect((0, getViewHeightClassName_1.getViewHeightClassName)('base', adaptivity_1.ViewHeight.SMALL)).toBe(`base--viewHeight-small`));
+        it('returns desktop className', () => expect((0, getViewHeightClassName_1.getViewHeightClassName)('base', types_1.ViewHeight.EXTRA_SMALL)).toBe(`base--viewHeight-extraSmall`));
+        it('returns mobile className', () => expect((0, getViewHeightClassName_1.getViewHeightClassName)('base', types_1.ViewHeight.MEDIUM)).toBe(`base--viewHeight-medium`));
+        it('returns smallMobile className', () => expect((0, getViewHeightClassName_1.getViewHeightClassName)('base', types_1.ViewHeight.SMALL)).toBe(`base--viewHeight-small`));
     });
     describe('with `styles` argument', () => {
         const styles = {
@@ -21,8 +21,8 @@ describe('getViewHeightClassName', () => {
             'base--viewHeight-small': 'some-hash-smallMobile',
         };
         it("returns 'none' className if there is no viewHeight", () => expect((0, getViewHeightClassName_1.getViewHeightClassName)('base', undefined, styles)).toBe(styles['base--viewHeight-none']));
-        it('returns desktop className', () => expect((0, getViewHeightClassName_1.getViewHeightClassName)('base', adaptivity_1.ViewHeight.EXTRA_SMALL, styles)).toBe(styles[`base--viewHeight-extraSmall`]));
-        it('returns mobile className', () => expect((0, getViewHeightClassName_1.getViewHeightClassName)('base', adaptivity_1.ViewHeight.MEDIUM, styles)).toBe(styles[`base--viewHeight-medium`]));
-        it('returns smallMobile className', () => expect((0, getViewHeightClassName_1.getViewHeightClassName)('base', adaptivity_1.ViewHeight.SMALL, styles)).toBe(styles[`base--viewHeight-small`]));
+        it('returns desktop className', () => expect((0, getViewHeightClassName_1.getViewHeightClassName)('base', types_1.ViewHeight.EXTRA_SMALL, styles)).toBe(styles[`base--viewHeight-extraSmall`]));
+        it('returns mobile className', () => expect((0, getViewHeightClassName_1.getViewHeightClassName)('base', types_1.ViewHeight.MEDIUM, styles)).toBe(styles[`base--viewHeight-medium`]));
+        it('returns smallMobile className', () => expect((0, getViewHeightClassName_1.getViewHeightClassName)('base', types_1.ViewHeight.SMALL, styles)).toBe(styles[`base--viewHeight-small`]));
     });
 });

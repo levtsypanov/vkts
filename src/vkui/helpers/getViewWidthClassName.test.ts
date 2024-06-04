@@ -1,4 +1,4 @@
-import { ViewWidth } from '@vkontakte/vkui/dist/lib/adaptivity';
+import { ViewWidth } from './types';
 import { getViewWidthClassName } from './getViewWidthClassName';
 
 /**

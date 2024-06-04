@@ -1,4 +1,3 @@
-import { Platform } from '@vkontakte/vkui/dist/lib/platform';
 import { getPlatformClassName } from './getPlatformClassName';
 
 /**
@@ -7,7 +6,7 @@ import { getPlatformClassName } from './getPlatformClassName';
 describe(getPlatformClassName, () => {
   describe('without `styles` argument', () => {
     it('return platform name', () =>
-      expect(getPlatformClassName('base', Platform.IOS)).toBe('base--ios'));
+      expect(getPlatformClassName('base', 'ios')).toBe('base--ios'));
   });
 
   describe('with `styles` argument', () => {
@@ -18,6 +17,6 @@ describe(getPlatformClassName, () => {
       'base--vkcom': 'some-hash-vkcom',
     };
     it('return platform name', () =>
-      expect(getPlatformClassName('base', Platform.IOS, styles)).toBe(styles['base--ios']));
+      expect(getPlatformClassName('base', 'ios', styles)).toBe(styles['base--ios']));
   });
 });

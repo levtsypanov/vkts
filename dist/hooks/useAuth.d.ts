@@ -1,4 +1,4 @@
-declare type TAuthToken = {
+type TAuthToken = {
     scope: string;
     app_id: number;
 };

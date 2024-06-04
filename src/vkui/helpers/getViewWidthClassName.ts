@@ -1,4 +1,4 @@
-import { ViewWidth } from '@vkontakte/vkui/dist/lib/adaptivity';
+import { ViewWidth } from './types';
 
 /**
  * Note: VKUI оказалось от использования динамических вычислений свойств на мапы, но мы продолжаем их поддержку в частичной форме.

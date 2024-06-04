@@ -1,4 +1,4 @@
-import { ViewHeight } from '@vkontakte/vkui/dist/lib/adaptivity';
+import { ViewHeight } from './types';
 import { getViewHeightClassName } from './getViewHeightClassName';
 
 /**

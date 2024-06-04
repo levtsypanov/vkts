@@ -3,7 +3,7 @@ import vkBridge from '@vkontakte/vk-bridge';
 /**
  * Проверяет наличие прав доступа токена сообщества
  * @param accessToken токен сообщества
- * @param expectedScope набор названий ожидаемых прав доступа сообщества (https://vk.com/dev/permissions)
+ * @param expectedScope набор названий ожидаемых прав доступа сообщества (https://dev.vk.com/ru/reference/access-rights)
  */
 export async function validateCommunityTokenScope(accessToken: string, expectedScope: string[]): Promise<boolean> {
   const { response } = await vkBridge.send('VKWebAppCallAPIMethod', {
@@ -23,7 +23,7 @@ export async function validateCommunityTokenScope(accessToken: string, expectedS
  * Запрашивает у пользователя токен сообщества с определенным набором прав и проверяет токен на соответствие прав
  * @param appId идентификатор приложения
  * @param groupId идентификатор сообщества
- * @param scope набор названий прав доступа сообщества (https://vk.com/dev/permissions)
+ * @param scope набор названий прав доступа сообщества (https://dev.vk.com/ru/reference/access-rights)
  */
 export async function getCommunityToken(appId: number, groupId: number, scope: string[]): Promise<string | null> {
   return await vkBridge
@@ -47,7 +47,7 @@ export async function getCommunityToken(appId: number, groupId: number, scope: s
  * Запрашивает у пользователя токен сообщества с определенным набором прав и проверяет токен на соответствие прав
  * @param appId идентификатор приложения
  * @param groupId идентификатор сообщества
- * @param scope набор названий прав доступа сообщества (https://vk.com/dev/permissions)
+ * @param scope набор названий прав доступа сообщества (https://dev.vk.com/ru/reference/access-rights)
  */
 export async function getValidCommunityToken(appId: number, groupId: number, scope: string[]): Promise<string | null> {
   const accessToken = await vkBridge

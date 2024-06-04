@@ -1,21 +1,21 @@
 import { Method } from 'axios';
-declare type SuccessResponse<T> = {
+type SuccessResponse<T> = {
     result: 'success';
     data: T;
 };
-declare type FailResponse = {
+type FailResponse = {
     result: 'fail';
     error: string;
     errorDesc: string;
 };
-declare type CustomResponse<T> = SuccessResponse<T> | FailResponse;
-declare type PostData = {
+type CustomResponse<T> = SuccessResponse<T> | FailResponse;
+type PostData = {
     [key: string]: string | Blob;
 };
-declare type Params = {
+type Params = {
     [key: string]: any;
 };
-declare type Headers = {
+type Headers = {
     [key: string]: string;
 };
 /**

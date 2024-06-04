@@ -24,7 +24,7 @@ export interface StorageValuesMap {
 /**
  * Возвращает тип данных для указанного поля хранилища.
  */
-export declare type StorageValueType<T extends StorageField> = StorageValuesMap[T];
+export type StorageValueType<T extends StorageField> = StorageValuesMap[T];
 /**
  * Задает значение для ключа хранилища.
  * @param {F} field

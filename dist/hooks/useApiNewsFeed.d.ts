@@ -45,5 +45,5 @@ export interface ApiSchema {
         response: NewsfeedGetListsExtendedResponse;
     };
 }
-export declare type CallApiMethod = <T extends keyof ApiSchema = keyof ApiSchema>(method: T, data: ApiSchema[T]['params']) => Promise<ApiSchema[T]['response']>;
+export type CallApiMethod = <T extends keyof ApiSchema = keyof ApiSchema>(method: T, data: ApiSchema[T]['params']) => Promise<ApiSchema[T]['response']>;
 export declare const useApi: (token: string, version: string) => CallApiMethod;

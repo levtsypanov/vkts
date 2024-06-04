@@ -1,4 +1,3 @@
-import { Appearance } from '@vkontakte/vkui';
 export declare const fixTypography: (string: any, wordLength?: number) => any;
 export declare function pluralize(number: number, titles: string): string;
 export declare const FireEvent: (link: any) => void;
@@ -19,7 +18,7 @@ export declare function getHash(): any;
 export declare function desktopShare(url: string, image: string, title: string, comment?: any): void;
 export declare function _inlineShare(popup?: any, surl?: any, params?: any, popupName?: any, popupParams?: any): void;
 declare function getQueryVariable(variable: any): string | undefined;
-declare function currentScheme(): "amoled" | Appearance;
+declare function currentScheme(): "amoled" | "dark" | "light";
 declare function getPlatform(): "phone" | "computer";
 declare function copy(text: string): void;
 export declare function getAndroidVersion(): number | false;

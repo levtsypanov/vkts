@@ -1,4 +1,4 @@
-import axios, { Method } from 'axios';
+import { Method } from 'axios';
 import { axiosRequestConfig, axiosRequestDefault } from './axiosRequestDefault';
 
 type SuccessResponse<T> = {

@@ -1,4 +1,4 @@
-import { ViewHeight } from '@vkontakte/vkui/dist/lib/adaptivity';
+import { ViewHeight } from './types';
 
 /**
  * Note: VKUI оказалось от использования динамических вычислений свойств на мапы, но мы продолжаем их поддержку в частичной форме.

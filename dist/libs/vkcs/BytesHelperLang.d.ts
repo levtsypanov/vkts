@@ -1,4 +1,4 @@
-declare type ToHumanFriendlyParams = {
+type ToHumanFriendlyParams = {
     bytes: number;
     fractionDigits?: number;
     useSi?: boolean;

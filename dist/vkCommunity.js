@@ -8,7 +8,7 @@ const vk_bridge_1 = __importDefault(require("@vkontakte/vk-bridge"));
 /**
  * Проверяет наличие прав доступа токена сообщества
  * @param accessToken токен сообщества
- * @param expectedScope набор названий ожидаемых прав доступа сообщества (https://vk.com/dev/permissions)
+ * @param expectedScope набор названий ожидаемых прав доступа сообщества (https://dev.vk.com/ru/reference/access-rights)
  */
 async function validateCommunityTokenScope(accessToken, expectedScope) {
     const { response } = await vk_bridge_1.default.send('VKWebAppCallAPIMethod', {
@@ -26,7 +26,7 @@ exports.validateCommunityTokenScope = validateCommunityTokenScope;
  * Запрашивает у пользователя токен сообщества с определенным набором прав и проверяет токен на соответствие прав
  * @param appId идентификатор приложения
  * @param groupId идентификатор сообщества
- * @param scope набор названий прав доступа сообщества (https://vk.com/dev/permissions)
+ * @param scope набор названий прав доступа сообщества (https://dev.vk.com/ru/reference/access-rights)
  */
 async function getCommunityToken(appId, groupId, scope) {
     return await vk_bridge_1.default
@@ -49,7 +49,7 @@ exports.getCommunityToken = getCommunityToken;
  * Запрашивает у пользователя токен сообщества с определенным набором прав и проверяет токен на соответствие прав
  * @param appId идентификатор приложения
  * @param groupId идентификатор сообщества
- * @param scope набор названий прав доступа сообщества (https://vk.com/dev/permissions)
+ * @param scope набор названий прав доступа сообщества (https://dev.vk.com/ru/reference/access-rights)
  */
 async function getValidCommunityToken(appId, groupId, scope) {
     const accessToken = await vk_bridge_1.default

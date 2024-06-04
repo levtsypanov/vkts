@@ -5,7 +5,7 @@ export declare enum Scheme {
     VKCOM_LIGHT = "vkcom_light",
     VKCOM_DARK = "vkcom_dark"
 }
-export declare type AppearanceScheme = AppearanceSchemeType | Scheme.VKCOM_DARK | Scheme.VKCOM_LIGHT;
+export type AppearanceScheme = AppearanceSchemeType | Scheme.VKCOM_DARK | Scheme.VKCOM_LIGHT;
 export declare enum Appearance {
     DARK = "dark",
     LIGHT = "light"
